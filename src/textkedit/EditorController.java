@@ -88,11 +88,13 @@ public class EditorController {
 
         File file = fileChooser.showSaveDialog(null);
 
-        AsciiFile asciiFile = new AsciiFile(file.toPath(), Arrays.asList(editorArea.getText().split("\n")));
+        if(file != null) {
+            AsciiFile asciiFile = new AsciiFile(file.toPath(), Arrays.asList(editorArea.getText().split("\n")));
 
-        editorModel.save(asciiFile);
-        this.currentAsciiFile = asciiFile;
-        this.updateFilename();
+            editorModel.save(asciiFile);
+            this.currentAsciiFile = asciiFile;
+            this.updateFilename();
+        }
     }
 
     private void updateFilename() {
