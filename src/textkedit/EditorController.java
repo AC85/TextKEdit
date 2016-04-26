@@ -20,13 +20,19 @@ public class EditorController {
 
     private EditorModel editorModel;
 
+    private FileChooser.ExtensionFilter allowedExtensions;
+
     public EditorController(EditorModel model) {
         this.editorModel = model;
+
+        this.allowedExtensions = new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt");
     }
 
     @FXML
     private void onOpen() {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open file ...");
+        fileChooser.getExtensionFilters().add(this.allowedExtensions);
         fileChooser.setInitialDirectory(new File("./"));
         File file = fileChooser.showOpenDialog(null);
 
@@ -64,8 +70,9 @@ public class EditorController {
     @FXML
     private void onSaveAs() {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as ...");
+        fileChooser.getExtensionFilters().add(this.allowedExtensions);
         if(this.currentAsciiFile != null) {
-            fileChooser.setInitialDirectory(this.currentAsciiFile.getFile().toFile());
             fileChooser.setInitialDirectory(this.currentAsciiFile.getFile().getParentFile());
         } else {
             fileChooser.setInitialDirectory(new File("./"));
