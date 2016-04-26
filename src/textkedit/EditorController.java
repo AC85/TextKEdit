@@ -68,7 +68,15 @@ public class EditorController {
     private void onSave() {
         if(this.currentAsciiFile != null) {
             AsciiFile asciiFile = new AsciiFile(currentAsciiFile.getPath(), Arrays.asList(editorArea.getText().split("\n")));
-            editorModel.save(asciiFile);
+
+            IOResult<AsciiFile> ioResult = editorModel.save(asciiFile);
+
+            if(!ioResult.wasSuccessful()) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("File Error");
+                alert.setHeaderText("File could not be saved");
+                alert.showAndWait();
+            }
         } else {
             this.onSaveAs();
         }
@@ -91,9 +99,17 @@ public class EditorController {
         if(file != null) {
             AsciiFile asciiFile = new AsciiFile(file.toPath(), Arrays.asList(editorArea.getText().split("\n")));
 
-            editorModel.save(asciiFile);
-            this.currentAsciiFile = asciiFile;
-            this.updateFilename();
+            IOResult<AsciiFile> ioResult = editorModel.save(asciiFile);
+
+            if(ioResult.wasSuccessful()) {
+                this.currentAsciiFile = asciiFile;
+                this.updateFilename();
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("File Error");
+                alert.setHeaderText("File could not be saved");
+                alert.showAndWait();
+            }
         }
     }
 
