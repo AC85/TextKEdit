@@ -1,10 +1,10 @@
 package textkedit;
 
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.scene.control.TextArea;
 
-import java.awt.*;
 import java.io.File;
 import java.util.Arrays;
 
@@ -12,6 +12,9 @@ public class EditorController {
 
     @FXML
     private TextArea editorArea;
+
+    @FXML
+    private Text statusBarFilename;
 
     private AsciiFile currentAsciiFile;
 
@@ -35,6 +38,8 @@ public class EditorController {
 
                 this.editorArea.clear();
                 this.currentAsciiFile.getContent().forEach(line -> editorArea.appendText(line + "\n"));
+
+                this.updateFilename();
             }
         }
     }
@@ -43,6 +48,7 @@ public class EditorController {
     private void onClose() {
         this.currentAsciiFile = null;
         this.editorArea.clear();
+        this.updateFilename();
     }
 
     @FXML
@@ -67,5 +73,14 @@ public class EditorController {
         AsciiFile asciiFile = new AsciiFile(file.toPath(), Arrays.asList(editorArea.getText().split("\n")));
         editorModel.save(asciiFile);
         this.currentAsciiFile = asciiFile;
+        this.updateFilename();
+    }
+
+    private void updateFilename() {
+        String filename = "";
+        if(this.currentAsciiFile != null) {
+            filename = this.currentAsciiFile.getPath().getFileName().normalize().toString();
+        }
+        this.statusBarFilename.setText(filename);
     }
 }
