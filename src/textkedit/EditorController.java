@@ -41,7 +41,7 @@ public class EditorController {
         if(file != null) {
             IOResult<AsciiFile> ioResult = this.editorModel.load(file.toPath());
 
-            if(!ioResult.hasFailed() && ioResult.hasData()) {
+            if(ioResult.wasSuccessful() && ioResult.hasData()) {
                 this.currentAsciiFile = ioResult.getData();
 
                 this.editorArea.clear();

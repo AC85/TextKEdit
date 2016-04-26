@@ -24,11 +24,11 @@ public class EditorModel {
         try {
             List<String> lines = Files.readAllLines(file);
 
-            return new IOResult<>(false, new AsciiFile(file, lines));
+            return new IOResult<>(new AsciiFile(file, lines), null);
 
         } catch (IOException e) {
             e.printStackTrace();
-            return new IOResult<>(true, null);
+            return new IOResult<>(null, e);
         }
     }
 }
