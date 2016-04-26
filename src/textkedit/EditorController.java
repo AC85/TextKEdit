@@ -54,7 +54,7 @@ public class EditorController {
     @FXML
     private void onSave() {
         if(this.currentAsciiFile != null) {
-            AsciiFile asciiFile = new AsciiFile(currentAsciiFile.getFile(), Arrays.asList(editorArea.getText().split("\n")));
+            AsciiFile asciiFile = new AsciiFile(currentAsciiFile.getPath(), Arrays.asList(editorArea.getText().split("\n")));
             editorModel.save(asciiFile);
         } else {
             this.onSaveAs();
@@ -66,6 +66,7 @@ public class EditorController {
         FileChooser fileChooser = new FileChooser();
         if(this.currentAsciiFile != null) {
             fileChooser.setInitialDirectory(this.currentAsciiFile.getFile().toFile());
+            fileChooser.setInitialDirectory(this.currentAsciiFile.getFile().getParentFile());
         } else {
             fileChooser.setInitialDirectory(new File("./"));
         }

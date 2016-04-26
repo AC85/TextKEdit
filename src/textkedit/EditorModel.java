@@ -15,7 +15,7 @@ public class EditorModel {
     public void save(AsciiFile file) {
 
         try {
-            Files.write(file.getFile(), file.getContent());
+            Files.write(file.getPath(), file.getContent());
         } catch (IOException e) {
             e.printStackTrace();
         }
