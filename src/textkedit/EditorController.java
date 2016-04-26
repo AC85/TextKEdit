@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.File;
 import java.util.Arrays;
@@ -46,6 +48,11 @@ public class EditorController {
                 this.currentAsciiFile.getContent().forEach(line -> editorArea.appendText(line + "\n"));
 
                 this.updateFilename();
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("File Error");
+                alert.setHeaderText("File could not be opened");
+                alert.showAndWait();
             }
         }
     }
@@ -72,13 +79,17 @@ public class EditorController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as ...");
         fileChooser.getExtensionFilters().add(this.allowedExtensions);
+
         if(this.currentAsciiFile != null) {
             fileChooser.setInitialDirectory(this.currentAsciiFile.getFile().getParentFile());
         } else {
             fileChooser.setInitialDirectory(new File("./"));
         }
+
         File file = fileChooser.showSaveDialog(null);
+
         AsciiFile asciiFile = new AsciiFile(file.toPath(), Arrays.asList(editorArea.getText().split("\n")));
+
         editorModel.save(asciiFile);
         this.currentAsciiFile = asciiFile;
         this.updateFilename();
@@ -86,9 +97,11 @@ public class EditorController {
 
     private void updateFilename() {
         String filename = "";
+
         if(this.currentAsciiFile != null) {
             filename = this.currentAsciiFile.getPath().getFileName().normalize().toString();
         }
+
         this.statusBarFilename.setText(filename);
     }
 }
