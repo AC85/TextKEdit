@@ -15,7 +15,7 @@ public class EditorModel {
     public void save(AsciiFile file) {
 
         try {
-            Files.write(file.getFile(), file.getContent(), StandardOpenOption.CREATE);
+            Files.write(file.getFile(), file.getContent());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,9 +32,4 @@ public class EditorModel {
             return new IOResult<>(true, null);
         }
     }
-
-    public void close() {
-
-    }
-
 }

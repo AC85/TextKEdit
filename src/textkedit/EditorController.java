@@ -41,13 +41,31 @@ public class EditorController {
 
     @FXML
     private void onClose() {
-
+        this.currentAsciiFile = null;
+        this.editorArea.clear();
     }
 
     @FXML
     private void onSave() {
-        AsciiFile asciiFile = new AsciiFile(currentAsciiFile.getFile(), Arrays.asList(editorArea.getText().split("\n")));
-        editorModel.save(asciiFile);
+        if(this.currentAsciiFile != null) {
+            AsciiFile asciiFile = new AsciiFile(currentAsciiFile.getFile(), Arrays.asList(editorArea.getText().split("\n")));
+            editorModel.save(asciiFile);
+        } else {
+            this.onSaveAs();
+        }
     }
 
+    @FXML
+    private void onSaveAs() {
+        FileChooser fileChooser = new FileChooser();
+        if(this.currentAsciiFile != null) {
+            fileChooser.setInitialDirectory(this.currentAsciiFile.getFile().toFile());
+        } else {
+            fileChooser.setInitialDirectory(new File("./"));
+        }
+        File file = fileChooser.showSaveDialog(null);
+        AsciiFile asciiFile = new AsciiFile(file.toPath(), Arrays.asList(editorArea.getText().split("\n")));
+        editorModel.save(asciiFile);
+        this.currentAsciiFile = asciiFile;
+    }
 }
