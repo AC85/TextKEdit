@@ -1,6 +1,8 @@
 package textkedit;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.scene.control.TextArea;
@@ -16,7 +18,7 @@ public class EditorController {
     private TextArea editorArea;
 
     @FXML
-    private Text statusBarFilename;
+    private Label statusBarFilename;
 
     private AsciiFile currentAsciiFile;
 
@@ -118,6 +120,12 @@ public class EditorController {
 
         if(this.currentAsciiFile != null) {
             filename = this.currentAsciiFile.getPath().getFileName().normalize().toString();
+            this.statusBarFilename.setTooltip(
+                    new Tooltip(this.currentAsciiFile.getPath().toString())
+            );
+        } else {
+            //remove tooltip if no file is present
+            this.statusBarFilename.setTooltip(null);
         }
 
         this.statusBarFilename.setText(filename);
