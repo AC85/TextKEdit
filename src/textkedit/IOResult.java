@@ -1,20 +1,22 @@
 package textkedit;
 
+import java.io.IOException;
+
 /**
  * Created by Flo on 25.04.16.
  */
 public class IOResult<T> {
 
     private T data;
-    private boolean error;
+    private IOException exception;
 
-    public IOResult(boolean _error, T data) {
-        this.error = _error;
+    public IOResult(T data, IOException exception) {
+        this.exception = exception;
         this.data = data;
     }
 
-    public boolean hasFailed() {
-        return this.error;
+    public boolean wasSuccessful() {
+        return this.exception == null;
     }
 
     public boolean hasData() {

@@ -1,5 +1,6 @@
 package textkedit;
 
+import java.io.File;
 import java.util.List;
 import java.nio.file.Path;
 
@@ -8,7 +9,7 @@ import java.nio.file.Path;
  */
 public class AsciiFile {
 
-    private final Path  file;
+    private final Path file;
 
     private final List<String> content;
 
@@ -17,7 +18,11 @@ public class AsciiFile {
         this.content = content;
     }
 
-    public Path getFile() {
+    public File getFile() {
+        return this.file.toFile();
+    }
+
+    public Path getPath() {
         return this.file;
     }
 

@@ -3,7 +3,6 @@ package textkedit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 /**
@@ -12,29 +11,37 @@ import java.util.List;
 public class EditorModel {
 
 
-    public void save(AsciiFile file) {
+    /**
+     * will return the AsciiFile wrapped withing IOResult, can be used to access a possible exception
+     * @param file
+     * @return
+     */
+    public IOResult<AsciiFile> save(AsciiFile file) {
 
         try {
-            Files.write(file.getFile(), file.getContent(), StandardOpenOption.CREATE);
+            Files.write(file.getPath(), file.getContent());
+
+            return new IOResult<>(file, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            return new IOResult<>(file, e);
         }
     }
 
+    /**
+     * will return IOResult either with a AsciiFile inside, if successful,
+     * if not the data will be null and contain an exception
+     * @param file
+     * @return
+     */
     public IOResult<AsciiFile> load(Path file) {
         try {
             List<String> lines = Files.readAllLines(file);
 
-            return new IOResult<>(false, new AsciiFile(file, lines));
+            return new IOResult<>(new AsciiFile(file, lines), null);
 
         } catch (IOException e) {
             e.printStackTrace();
-            return new IOResult<>(true, null);
+            return new IOResult<>(null, e);
         }
     }
-
-    public void close() {
-
-    }
-
 }
