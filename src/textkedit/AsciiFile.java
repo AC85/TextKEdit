@@ -5,7 +5,7 @@ import java.util.List;
 import java.nio.file.Path;
 
 /**
- * Created by Flo on 25.04.16.
+ * Created by Alex on 25.04.16.
  */
 public class AsciiFile {
 

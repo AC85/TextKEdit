@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Created by Flo on 21.04.16.
+ * Created by Alex on 21.04.16.
  */
 public class EditorModel {
 

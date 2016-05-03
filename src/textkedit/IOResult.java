@@ -3,10 +3,12 @@ package textkedit;
 import java.io.IOException;
 
 /**
- * Created by Flo on 25.04.16.
+ * Created by Alex on 25.04.16.
  */
 public class IOResult<T> {
 
+
+    // variablen
     private T data;
     private IOException exception;
 
