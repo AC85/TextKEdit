@@ -11,7 +11,7 @@ public class KEditorApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        // was hat der Flo denn hier gemacht? LOLO ROFL GULP
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainLayout.fxml"));
         loader.setControllerFactory(t -> new EditorController(new EditorModel()));
 
