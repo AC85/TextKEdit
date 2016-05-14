@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 /**
  * Created by Flo on 14.05.16.
  */
-public class mainApp extends Application {
+public class MainApp extends Application {
 
     private Stage primaryStage;
 

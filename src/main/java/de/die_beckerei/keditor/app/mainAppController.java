@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Flo on 14.05.16.
  */
-public class mainAppController implements Initializable {
+public class MainAppController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
