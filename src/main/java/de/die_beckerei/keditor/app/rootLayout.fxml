@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.input.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.input.KeyCodeCombination?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="de.die_beckerei.keditor.app.mainAppController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open...">
+                      <accelerator>
+                          <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                      </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save">
+                      <accelerator>
+                          <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
+                      </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onSaveAs" text="Save as ...">
+                      <accelerator>
+                          <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="DOWN" shortcut="DOWN" />
+                      </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close File" />
+              </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="statusbar" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <Pane fx:id="editorArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
