@@ -4,6 +4,7 @@ import de.die_beckerei.keditor.app.editor.EditorController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class MainAppController {
     private ResourceBundle resources;
 
     @FXML
-    Pane editorArea;
+    AnchorPane editorArea;
 
     @FXML
     private void initialize() {

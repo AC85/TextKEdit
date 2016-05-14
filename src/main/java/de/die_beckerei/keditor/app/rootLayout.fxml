@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.input.KeyCodeCombination?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
     fx:controller="de.die_beckerei.keditor.app.MainAppController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
@@ -41,6 +41,6 @@
       </HBox>
    </bottom>
    <center>
-      <Pane fx:id="editorArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="editorArea" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

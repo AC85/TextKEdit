@@ -22,6 +22,7 @@ public class MainApp extends Application {
 
         this.primaryStage.setScene(new Scene(loader.load()));
         this.primaryStage.setTitle("TextKEdit");
+        this.primaryStage.setResizable(false);
         this.primaryStage.show();
 
     }
