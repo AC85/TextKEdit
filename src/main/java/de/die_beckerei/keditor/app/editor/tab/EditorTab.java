@@ -1,4 +1,4 @@
-package de.die_beckerei.keditor.app.editor;
+package de.die_beckerei.keditor.app.editor.tab;
 
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,16 +9,16 @@ import javafx.scene.layout.Priority;
 import java.util.Arrays;
 
 /**
- * This custom Tab construct its layout by adding a Textarea
+ * This custom EditorTab construct its layout by adding a Textarea
  * It needs an de.die_beckerei.keditor.app.file.Document to construct itself
  */
-public class Tab extends javafx.scene.control.Tab {
+public class EditorTab extends javafx.scene.control.Tab {
 
     Document document;
 
     TextArea textArea;
 
-    public Tab(Document file) {
+    public EditorTab(Document file) {
         super();
 
         this.document = file;

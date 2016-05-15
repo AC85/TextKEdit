@@ -1,15 +1,13 @@
 package de.die_beckerei.keditor.app.editor;
 
+import de.die_beckerei.keditor.app.editor.tab.EditorTab;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 
-import javax.print.Doc;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,54 +34,54 @@ public class EditorController {
 
 
     /**
-     * Create a new Tab for a empty Document
-     * This function is executed once on application startup since the event onSelectionChanged is triggered by the "+"-Tab
+     * Create a new EditorTab for a empty Document
+     * This function is executed once on application startup since the event onSelectionChanged is triggered by the "+"-EditorTab
      */
     public void onNewFileTab() {
-        Tab tab = new Tab(Document.newInstance(null));
-        this.addNewTab(tab, true);
+        EditorTab editorTab = new EditorTab(Document.newInstance(null));
+        this.addNewTab(editorTab, true);
     }
 
     public void openDocument(Document document) {
 
-        Tab tab = new Tab(document);
-        this.addNewTab(tab, true);
+        EditorTab editorTab = new EditorTab(document);
+        this.addNewTab(editorTab, true);
     }
 
 
     /**
-     * adds a newTab at the last position, but before the "+"-Tab which should always be last
-     * @param newTab
+     * adds a newEditorTab at the last position, but before the "+"-EditorTab which should always be last
+     * @param newEditorTab
      */
-    private void addNewTab(Tab newTab, boolean selected) {
+    private void addNewTab(EditorTab newEditorTab, boolean selected) {
         int tabbarSize = this.tabbar.getTabs().size();
         if(tabbarSize <= 0) {
-            this.tabbar.getTabs().add(newTab);
+            this.tabbar.getTabs().add(newEditorTab);
         } else {
-            this.tabbar.getTabs().add(tabbarSize - 1, newTab);
+            this.tabbar.getTabs().add(tabbarSize - 1, newEditorTab);
         }
 
         if(selected) {
-            this.tabbar.getSelectionModel().select(newTab);
+            this.tabbar.getSelectionModel().select(newEditorTab);
         }
     }
 
     /**
-     * closes current Tab
+     * closes current EditorTab
      */
     public void closeCurrentTab() {
-        Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
+        EditorTab editorTab = (EditorTab) this.tabbar.getSelectionModel().getSelectedItem();
 
-        this.closeTab(tab);
+        this.closeTab(editorTab);
     }
 
     /**
-     * closes given tab
-     * will reopen a new tab if this was the last open tab
-     * @param tab
+     * closes given editorTab
+     * will reopen a new editorTab if this was the last open editorTab
+     * @param editorTab
      */
-    private void closeTab(Tab tab) {
-        this.tabbar.getTabs().remove(tab);
+    private void closeTab(EditorTab editorTab) {
+        this.tabbar.getTabs().remove(editorTab);
 
         //create empty document if no more tabs are present
         if(this.tabbar.getTabs().isEmpty()) {
@@ -91,17 +89,17 @@ public class EditorController {
         }
     }
 
-    private void replaceCurrentTab(Tab tab) {
-        Tab currentTab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
+    private void replaceCurrentTab(EditorTab editorTab) {
+        EditorTab currentEditorTab = (EditorTab) this.tabbar.getSelectionModel().getSelectedItem();
         int currentTabIndex = this.tabbar.getSelectionModel().getSelectedIndex();
 
-        this.tabbar.getTabs().add(currentTabIndex, tab);
-        this.tabbar.getTabs().remove(currentTab);
+        this.tabbar.getTabs().add(currentTabIndex, editorTab);
+        this.tabbar.getTabs().remove(currentEditorTab);
     }
 
     public void saveCurrentDocument() throws IOException {
-        Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
-        Document document = tab.getDocument();
+        EditorTab editorTab = (EditorTab) this.tabbar.getSelectionModel().getSelectedItem();
+        Document document = editorTab.getDocument();
 
         if(document.isTransient()) {
             this.saveAs();
@@ -123,13 +121,13 @@ public class EditorController {
 
         Document document = Document.newInstance(file.toPath(), this.getContentFromCurrentTab());
 
-        this.replaceCurrentTab(new Tab(document));
+        this.replaceCurrentTab(new EditorTab(document));
 
         this.saveDocumentAs(document);
     }
 
     private List<String> getContentFromCurrentTab() {
-        Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
-        return tab.getDocument().getContent();
+        EditorTab editorTab = (EditorTab) this.tabbar.getSelectionModel().getSelectedItem();
+        return editorTab.getDocument().getContent();
     }
 }
