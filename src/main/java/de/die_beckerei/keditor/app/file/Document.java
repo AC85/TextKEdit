@@ -76,6 +76,6 @@ public class Document {
     }
 
     public static void save(Document document) throws IOException {
-        Files.write(document.getPath(), document.getContent());
+        Files.write(document.getPath(), document.getContent(), Charset.forName("ISO-8859-1"));
     }
 }
