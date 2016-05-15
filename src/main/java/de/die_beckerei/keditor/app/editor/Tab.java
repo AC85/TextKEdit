@@ -1,29 +1,29 @@
 package de.die_beckerei.keditor.app.editor;
 
-import de.die_beckerei.keditor.app.file.File;
+import de.die_beckerei.keditor.app.file.Document;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 /**
  * This custom Tab construct its layout by adding a Textarea
- * It needs an de.die_beckerei.keditor.app.file.File to construct itself
+ * It needs an de.die_beckerei.keditor.app.file.Document to construct itself
  */
 public class Tab extends javafx.scene.control.Tab {
 
-    File file;
+    Document document;
 
     TextArea textArea;
 
-    public Tab(File file) {
+    public Tab(Document file) {
         super();
 
-        this.file = file;
+        this.document = file;
 
         this.setText(file.getFilename());
 
         this.textArea = new TextArea();
-        this.file.getContent().forEach(
+        this.document.getContent().forEach(
                 line -> this.textArea.appendText(line + "\n")
         );
 

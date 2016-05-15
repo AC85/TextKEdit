@@ -1,12 +1,10 @@
 package de.die_beckerei.keditor.app.editor;
 
-import de.die_beckerei.keditor.app.file.File;
+import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -26,14 +24,20 @@ public class EditorController {
 
     @FXML
     private void initialize() {
-        Tab defaultTab = new Tab(new File());
+        Tab defaultTab = new Tab(new Document());
 
         this.addNewTab(defaultTab, true);
     }
 
 
     public void onNewFileTab() {
-        Tab tab = new Tab(new File());
+        Tab tab = new Tab(new Document());
+        this.addNewTab(tab, true);
+    }
+
+    public void openDocument(Document document) {
+
+        Tab tab = new Tab(document);
         this.addNewTab(tab, true);
     }
 
