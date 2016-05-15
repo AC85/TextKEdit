@@ -33,13 +33,6 @@
         </menus>
       </MenuBar>
    </top>
-   <bottom>
-      <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="statusbar" />
-         </children>
-      </HBox>
-   </bottom>
    <center>
       <AnchorPane fx:id="editorArea" BorderPane.alignment="CENTER" />
    </center>
