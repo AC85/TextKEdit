@@ -18,10 +18,18 @@ public class Document {
 
     private List<String> content;
 
-    public Document() {
+    private Document(Path path) {
+        this(path, new ArrayList<>());
+    }
 
-        this.filename = "New Document";
-        this.content = new ArrayList<>();
+    private Document(Path path, List<String> content) {
+        this.path = path;
+        if(this.path != null) {
+            this.filename = this.path.getFileName().normalize().toString();
+        } else {
+            this.filename = "New File";
+        }
+        this.content = content;
     }
 
     private Document(Path file, String filename, List<String> lines) {
@@ -29,6 +37,8 @@ public class Document {
         this.filename = filename;
         this.content = lines;
     }
+
+    public Path getPath() { return this.path; }
 
     public String getFilename() {
         return this.filename;
@@ -38,6 +48,18 @@ public class Document {
         return this.content;
     }
 
+    public void setContent(List<String> content) {
+        this.content = content;
+    }
+
+    public boolean isEmpty() {
+        return this.content.isEmpty();
+    }
+
+    public boolean isTransient() {
+        return (this.path == null);
+    }
+
     public static Document load(Path file) throws IOException {
         List<String> lines = Files.readAllLines(file, Charset.forName("ISO-8859-1")); //TODO: is this appropriate?
         String filename = file.getFileName().toString();
@@ -45,4 +67,15 @@ public class Document {
         return  new Document(file, filename, lines);
     }
 
+    public static Document newInstance(Path path) {
+        return new Document(path);
+    }
+
+    public static Document newInstance(Path path, List<String> content) {
+        return new Document(path, content);
+    }
+
+    public static void save(Document document) throws IOException {
+        Files.write(document.getPath(), document.getContent());
+    }
 }

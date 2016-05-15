@@ -4,6 +4,11 @@ import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 
+import javax.print.Doc;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -29,7 +34,7 @@ public class EditorController {
      * This function is executed once on application startup since the event onSelectionChanged is triggered by the "+"-Tab
      */
     public void onNewFileTab() {
-        Tab tab = new Tab(new Document());
+        Tab tab = new Tab(Document.newInstance(null));
         this.addNewTab(tab, true);
     }
 
@@ -74,9 +79,35 @@ public class EditorController {
     private void closeTab(Tab tab) {
         this.tabbar.getTabs().remove(tab);
 
-        //create empty document if nore more tabs are present
+        //create empty document if no more tabs are present
         if(this.tabbar.getTabs().isEmpty()) {
             this.onNewFileTab();
         }
+    }
+
+    public void saveCurrentDocument() throws IOException {
+        Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
+        Document document = tab.getDocument();
+
+        if(document.isTransient()) {
+            this.saveDocumentAs(document);
+        } else {
+            Document.save(document);
+        }
+    }
+
+    public void saveDocumentAs(Document document) throws IOException {
+        Document.save(document);
+    }
+
+    public void saveAs(Path path) throws IOException {
+        Document document = Document.newInstance(path, this.getContentFromCurrentTab());
+
+        this.saveDocumentAs(document);
+    }
+
+    public List<String> getContentFromCurrentTab() {
+        Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
+        return tab.getDocument().getContent();
     }
 }

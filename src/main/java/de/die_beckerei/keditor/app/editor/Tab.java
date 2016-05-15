@@ -5,6 +5,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
+import java.util.Arrays;
+
 /**
  * This custom Tab construct its layout by adding a Textarea
  * It needs an de.die_beckerei.keditor.app.file.Document to construct itself
@@ -35,4 +37,12 @@ public class Tab extends javafx.scene.control.Tab {
 
     }
 
+    public Document getDocument() {
+
+        this.document.setContent(
+                Arrays.asList(this.textArea.getText().split("\n"))
+        );
+
+        return this.document;
+    }
 }
