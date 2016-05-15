@@ -2,7 +2,6 @@ package de.die_beckerei.keditor.app.editor;
 
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 
 import java.util.ResourceBundle;
@@ -20,12 +19,15 @@ public class EditorController {
 
     @FXML
     private void initialize() {
-        Tab defaultTab = new Tab(new Document());
 
-        this.addNewTab(defaultTab, true);
+        //onSelectionChanged is triggered on startup and will create a new empty document by default
     }
 
 
+    /**
+     * Create a new Tab for a empty Document
+     * This function is executed once on application startup since the event onSelectionChanged is triggered by the "+"-Tab
+     */
     public void onNewFileTab() {
         Tab tab = new Tab(new Document());
         this.addNewTab(tab, true);
