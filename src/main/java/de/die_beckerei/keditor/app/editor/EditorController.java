@@ -56,4 +56,27 @@ public class EditorController {
             this.tabbar.getSelectionModel().select(newTab);
         }
     }
+
+    /**
+     * closes current Tab
+     */
+    public void closeCurrentTab() {
+        Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
+
+        this.closeTab(tab);
+    }
+
+    /**
+     * closes given tab
+     * will reopen a new tab if this was the last open tab
+     * @param tab
+     */
+    private void closeTab(Tab tab) {
+        this.tabbar.getTabs().remove(tab);
+
+        //create empty document if nore more tabs are present
+        if(this.tabbar.getTabs().isEmpty()) {
+            this.onNewFileTab();
+        }
+    }
 }

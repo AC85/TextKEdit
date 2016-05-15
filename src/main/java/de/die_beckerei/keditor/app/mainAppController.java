@@ -58,7 +58,7 @@ public class MainAppController {
     }
 
     public void onClose() {
-
+        this.editorController.closeCurrentTab();
     }
 
     public void onSaveAs() {
