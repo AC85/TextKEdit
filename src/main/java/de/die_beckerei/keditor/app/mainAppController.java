@@ -70,21 +70,14 @@ public class MainAppController {
     }
 
     public void onSaveAs() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save as ...");
-
-        File file = fileChooser.showSaveDialog(null);
-
-        if(file != null) {
-            try {
-                this.editorController.saveAs(file.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("File Error");
-                alert.setHeaderText("File could not be saved");
-                alert.showAndWait();
-            }
+        try {
+            this.editorController.saveAs();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("File Error");
+            alert.setHeaderText("File could not be saved");
+            alert.showAndWait();
         }
     }
 

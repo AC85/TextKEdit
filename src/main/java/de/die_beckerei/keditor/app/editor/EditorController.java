@@ -3,8 +3,10 @@ package de.die_beckerei.keditor.app.editor;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
+import javafx.stage.FileChooser;
 
 import javax.print.Doc;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -85,23 +87,39 @@ public class EditorController {
         }
     }
 
+    private void replaceCurrentTab(Tab tab) {
+        Tab currentTab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
+        int currentTabIndex = this.tabbar.getSelectionModel().getSelectedIndex();
+
+        this.tabbar.getTabs().add(currentTabIndex, tab);
+        this.tabbar.getTabs().remove(currentTab);
+    }
+
     public void saveCurrentDocument() throws IOException {
         Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
         Document document = tab.getDocument();
 
         if(document.isTransient()) {
-            this.saveDocumentAs(document);
+            this.saveAs();
         } else {
             Document.save(document);
         }
     }
 
+
     public void saveDocumentAs(Document document) throws IOException {
         Document.save(document);
     }
 
-    public void saveAs(Path path) throws IOException {
-        Document document = Document.newInstance(path, this.getContentFromCurrentTab());
+    public void saveAs() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as ...");
+
+        File file = fileChooser.showSaveDialog(null);
+
+        Document document = Document.newInstance(file.toPath(), this.getContentFromCurrentTab());
+
+        this.replaceCurrentTab(new Tab(document));
 
         this.saveDocumentAs(document);
     }

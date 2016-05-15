@@ -1,6 +1,7 @@
 package de.die_beckerei.keditor.app.editor;
 
 import de.die_beckerei.keditor.app.file.Document;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,7 +23,7 @@ public class Tab extends javafx.scene.control.Tab {
 
         this.document = file;
 
-        this.setText(file.getFilename());
+        // this.setText(file.getFilename());
 
         this.textArea = new TextArea();
         this.document.getContent().forEach(
@@ -35,6 +36,7 @@ public class Tab extends javafx.scene.control.Tab {
 
         this.setContent(hbox);
 
+        this.textProperty().bind(this.document.filenameProperty());
     }
 
     public Document getDocument() {

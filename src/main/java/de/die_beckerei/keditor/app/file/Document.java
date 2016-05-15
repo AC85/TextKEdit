@@ -1,5 +1,8 @@
 package de.die_beckerei.keditor.app.file;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -14,7 +17,7 @@ public class Document {
 
     private Path path;
 
-    private String filename;
+    private SimpleStringProperty filename;
 
     private List<String> content;
 
@@ -25,23 +28,27 @@ public class Document {
     private Document(Path path, List<String> content) {
         this.path = path;
         if(this.path != null) {
-            this.filename = this.path.getFileName().normalize().toString();
+            this.filename = new SimpleStringProperty(this.path.getFileName().normalize().toString());
         } else {
-            this.filename = "New File";
+            this.filename = new SimpleStringProperty("New File");
         }
         this.content = content;
     }
 
     private Document(Path file, String filename, List<String> lines) {
         this.path = file;
-        this.filename = filename;
+        this.filename = new SimpleStringProperty(filename);
         this.content = lines;
     }
 
     public Path getPath() { return this.path; }
 
     public String getFilename() {
-        return this.filename;
+        return this.filename.get();
+    }
+
+    public StringProperty filenameProperty() {
+        return  this.filename;
     }
 
     public List<String> getContent() {
@@ -60,6 +67,10 @@ public class Document {
         return (this.path == null);
     }
 
+    public void updateFilename() {
+        this.filename.setValue(this.path.getFileName().normalize().toString());
+    }
+
     public static Document load(Path file) throws IOException {
         List<String> lines = Files.readAllLines(file, Charset.forName("ISO-8859-1")); //TODO: is this appropriate?
         String filename = file.getFileName().toString();
@@ -76,6 +87,7 @@ public class Document {
     }
 
     public static void save(Document document) throws IOException {
+        document.updateFilename();
         Files.write(document.getPath(), document.getContent(), Charset.forName("ISO-8859-1"));
     }
 }
