@@ -35,7 +35,6 @@ public class Document {
     }
 
     public List<String> getContent() {
-        this.content.add("ess");
         return this.content;
     }
 
