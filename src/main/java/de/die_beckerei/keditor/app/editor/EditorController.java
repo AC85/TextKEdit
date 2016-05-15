@@ -19,10 +19,6 @@ public class EditorController {
     private TabPane tabbar;
 
     @FXML
-    private Label newFile;
-
-
-    @FXML
     private void initialize() {
         Tab defaultTab = new Tab(new Document());
 
