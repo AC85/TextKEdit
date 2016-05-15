@@ -24,6 +24,10 @@ public class EditorController {
     @FXML
     private TabPane tabbar;
 
+
+    /**
+     * will be executed on controller instantiation
+     */
     @FXML
     private void initialize() {
 
@@ -107,7 +111,7 @@ public class EditorController {
     }
 
 
-    public void saveDocumentAs(Document document) throws IOException {
+    private void saveDocumentAs(Document document) throws IOException {
         Document.save(document);
     }
 
@@ -124,7 +128,7 @@ public class EditorController {
         this.saveDocumentAs(document);
     }
 
-    public List<String> getContentFromCurrentTab() {
+    private List<String> getContentFromCurrentTab() {
         Tab tab = (Tab) this.tabbar.getSelectionModel().getSelectedItem();
         return tab.getDocument().getContent();
     }
