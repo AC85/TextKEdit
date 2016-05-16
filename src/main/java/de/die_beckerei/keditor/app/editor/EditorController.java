@@ -1,13 +1,20 @@
 package de.die_beckerei.keditor.app.editor;
 
+import de.die_beckerei.keditor.app.crypto.CipherFactory;
+import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
 import de.die_beckerei.keditor.app.editor.tab.EditorTab;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 
+import javax.crypto.NoSuchPaddingException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -113,21 +120,47 @@ public class EditorController {
         Document.save(document);
     }
 
-    public void saveAs() throws IOException {
+    private File newFileChooser(String title) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save as ...");
+        fileChooser.setTitle(title);
+        return fileChooser.showSaveDialog(null);
+    }
 
-        File file = fileChooser.showSaveDialog(null);
+    public void saveAs() throws IOException {
+        File file = this.newFileChooser("Save as ...");
 
         Document document = Document.newInstance(file.toPath(), this.getContentFromCurrentTab());
 
-        this.replaceCurrentTab(new EditorTab(document));
+        //this.replaceCurrentTab(new EditorTab(document));
 
         this.saveDocumentAs(document);
+    }
+
+    private Document getCurrentDocument() {
+        EditorTab editorTab = (EditorTab) this.tabbar.getSelectionModel().getSelectedItem();
+        return editorTab.getDocument();
     }
 
     private List<String> getContentFromCurrentTab() {
         EditorTab editorTab = (EditorTab) this.tabbar.getSelectionModel().getSelectedItem();
         return editorTab.getDocument().getContent();
+    }
+
+    public void encryptToAES() throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
+
+        File file = this.newFileChooser("Save as ...");
+
+        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES);
+        Document currentDoc = this.getCurrentDocument();
+        byte[] asByte = currentDoc.toByte();
+        byte[] encrypted = cipher.encrypt(asByte);
+
+        ArrayList<String> newLine = new ArrayList<>();
+        newLine.add(new String(encrypted, Charset.forName(Document.charset)));
+
+        Document newdoc = Document.newInstance(file.toPath(), newLine);
+
+        Document.save(newdoc);
+
     }
 }

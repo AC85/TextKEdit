@@ -8,8 +8,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
+import javax.crypto.NoSuchPaddingException;
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.ResourceBundle;
 
 /**
@@ -78,6 +81,24 @@ public class MainAppController {
             alert.setTitle("File Error");
             alert.setHeaderText("File could not be saved");
             alert.showAndWait();
+        }
+    }
+
+    public void encryptToAES() {
+        try {
+            this.editorController.encryptToAES();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("File Error");
+            alert.setHeaderText("File could not be saved");
+            alert.showAndWait();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
         }
     }
 
