@@ -1,8 +1,12 @@
 package de.die_beckerei.keditor.app.file;
 
+import com.google.common.primitives.Bytes;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.bouncycastle.util.encoders.Hex;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -14,6 +18,8 @@ import java.util.List;
  * Created by Flo on 15.05.16.
  */
 public class Document {
+
+    public static final String charset = "ISO-8859-1";
 
     private Path path;
 
@@ -71,8 +77,28 @@ public class Document {
         this.filename.setValue(this.path.getFileName().normalize().toString());
     }
 
+    /**
+     * Convert document content to byte Array
+     * @return byte[]
+     */
+    public byte[] toByte() {
+
+        List<Byte> output = new ArrayList<>();
+
+        for(String line : this.content) {
+            byte[] c = line.getBytes();
+            for(byte b : c) {
+                output.add(b);
+            }
+            //add new line separator
+            output.add( (byte) '\n');
+        }
+
+        return Bytes.toArray(output);
+    }
+
     public static Document load(Path file) throws IOException {
-        List<String> lines = Files.readAllLines(file, Charset.forName("ISO-8859-1")); //TODO: is this appropriate?
+        List<String> lines = Files.readAllLines(file, Charset.forName(Document.charset)); //TODO: is this appropriate?
         String filename = file.getFileName().toString();
 
         return  new Document(file, filename, lines);
@@ -88,6 +114,6 @@ public class Document {
 
     public static void save(Document document) throws IOException {
         document.updateFilename();
-        Files.write(document.getPath(), document.getContent(), Charset.forName("ISO-8859-1"));
+        Files.write(document.getPath(), document.getContent(), Charset.forName(Document.charset));
     }
 }
