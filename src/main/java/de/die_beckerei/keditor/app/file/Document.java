@@ -33,14 +33,6 @@ public class Document {
         this(path, new ArrayList<>());
     }
 
-    private Document(Path path, byte[] input) {
-        //convert bytes[] to List<String>
-        String oneLine = new String(input, Charset.forName(Document.charset));
-        List<String> lines = Arrays.asList(oneLine.split("\n"));
-
-        Document.newInstance(path, lines);
-    }
-
     private Document(Path path, List<String> content) {
         this.path = path;
         if(this.path != null) {
@@ -115,7 +107,12 @@ public class Document {
     }
 
     public static Document newInstance(Path path, byte[] input) {
-        return new Document(path, input);
+
+        //convert bytes[] to List<String>
+        String oneLine = new String(input, Charset.forName(Document.charset));
+        List<String> lines = Arrays.asList(oneLine.split("\n"));
+
+        return new Document(path, lines);
     }
 
     public static Document newInstance(Path path) {
