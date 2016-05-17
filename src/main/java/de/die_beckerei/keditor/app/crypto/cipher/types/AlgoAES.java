@@ -19,14 +19,14 @@ public class AlgoAES implements Algorithm {
     Cipher cipher;
     SecretKeySpec key;
 
-    public AlgoAES() throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
+    public AlgoAES() throws Exception {
         this.cipher = Cipher.getInstance("AES/ECB/NoPadding", "BC");
         this.key = new SecretKeySpec(keyBytes, "AES");
 
     }
 
     @Override
-    public byte[] encrypt(byte[] context) throws InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
+    public byte[] encrypt(byte[] context) throws Exception {
 
         cipher.init(Cipher.ENCRYPT_MODE, key);
 
@@ -44,7 +44,7 @@ public class AlgoAES implements Algorithm {
     }
 
     @Override
-    public byte[] decrypt(byte[] context) throws InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
+    public byte[] decrypt(byte[] context) throws Exception {
 
         cipher.init(Cipher.DECRYPT_MODE, key);
 

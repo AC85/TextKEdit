@@ -2,6 +2,7 @@ package de.die_beckerei.keditor.app;
 
 import de.die_beckerei.keditor.app.editor.EditorController;
 import de.die_beckerei.keditor.app.file.Document;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -84,7 +85,7 @@ public class MainAppController {
         }
     }
 
-    public void encryptToAES() {
+    public void encryptToAES()  {
         try {
             this.editorController.encryptToAES();
         } catch (IOException e) {
@@ -93,11 +94,7 @@ public class MainAppController {
             alert.setTitle("File Error");
             alert.setHeaderText("File could not be saved");
             alert.showAndWait();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchProviderException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -113,5 +110,13 @@ public class MainAppController {
             e.printStackTrace();
         }
 
+    }
+
+    public void decryptFromAES() {
+        try {
+            this.editorController.encryptFromAES();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -18,11 +18,11 @@ public abstract class Cipher {
         this.algorithm = algorithm;
     }
 
-    public byte[] encrypt(byte[] context) {
+    public byte[] encrypt(byte[] context) throws Exception {
         return algorithm.encrypt(context);
     }
 
-    public byte[] decrypt(byte[] context) {
+    public byte[] decrypt(byte[] context) throws Exception {
         return algorithm.decrypt(context);
     }
 }

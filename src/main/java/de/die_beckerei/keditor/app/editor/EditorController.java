@@ -5,6 +5,7 @@ import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
 import de.die_beckerei.keditor.app.editor.tab.EditorTab;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 
@@ -146,7 +147,7 @@ public class EditorController {
         return editorTab.getDocument().getContent();
     }
 
-    public void encryptToAES() throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
+    public void encryptToAES() throws Exception {
 
         File file = this.newFileChooser("Save as ...");
 
@@ -161,6 +162,23 @@ public class EditorController {
         Document newdoc = Document.newInstance(file.toPath(), newLine);
 
         Document.save(newdoc);
+
+    }
+
+    public void encryptFromAES() throws Exception {
+
+        Document currentDoc = this.getCurrentDocument();
+
+        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES);
+
+        byte[] asByte = currentDoc.toByte();
+        byte[] decrypted = cipher.decrypt(asByte);
+        
+        Document newdoc = Document.newInstance(null, decrypted);
+
+        EditorTab newTab = new EditorTab(newdoc);
+
+        this.addNewTab(newTab, true);
 
     }
 }

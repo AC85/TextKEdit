@@ -15,7 +15,7 @@ import java.security.NoSuchProviderException;
  */
 public class CipherFactory {
 
-    public static Cipher getInstance(Cipher.TYPE ciphertype) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
+    public static Cipher getInstance(Cipher.TYPE ciphertype) throws Exception {
 
         switch (ciphertype) {
             case AES:

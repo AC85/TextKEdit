@@ -9,9 +9,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +31,14 @@ public class Document {
 
     private Document(Path path) {
         this(path, new ArrayList<>());
+    }
+
+    private Document(Path path, byte[] input) {
+        //convert bytes[] to List<String>
+        String oneLine = new String(input, Charset.forName(Document.charset));
+        List<String> lines = Arrays.asList(oneLine.split("\n"));
+
+        Document.newInstance(path, lines);
     }
 
     private Document(Path path, List<String> content) {
@@ -102,6 +112,10 @@ public class Document {
         String filename = file.getFileName().toString();
 
         return  new Document(file, filename, lines);
+    }
+
+    public static Document newInstance(Path path, byte[] input) {
+        return new Document(path, input);
     }
 
     public static Document newInstance(Path path) {
