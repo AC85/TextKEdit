@@ -6,15 +6,27 @@ package de.die_beckerei.keditor.app.crypto;
 public class CipherSettings {
 
     public enum PADDING {
-        NoPadding,
-        PKCS5,
-        PKCS7,
-        ZeroByte,
+        NoPadding ("No Padding"),
+        PKCS5 ("PKCS5"),
+        PKCS7 ("PKCS7"),
+        ZeroByte ("Zero Byte Padding");
+
+        private final String name;
+
+        PADDING(String s) {
+            name = s;
+        }
     }
 
-    public enum BlockModus {
-        ECB,
-        CBC,
-        CTS
+    public enum BLOCK {
+        ECB ("ECB (Electronic Codebook)"),
+        CBC ("CBC (Cipher Block Chaining)"),
+        CTS ("CTS (Ciphertext Stealing)");
+
+        private final String name;
+
+        BLOCK(String s) {
+            name = s;
+        }
     }
 }
