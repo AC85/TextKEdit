@@ -30,10 +30,6 @@ public class AlgoAES implements Algorithm {
 
         cipher.init(Cipher.ENCRYPT_MODE, key);
 
-
-        //TODO: for real?
-        context = Base64.getEncoder().encode(context);
-
         byte[] cipherText = new byte[context.length];
 
         int ctLength = cipher.update(context, 0, context.length, cipherText, 0);
@@ -52,8 +48,6 @@ public class AlgoAES implements Algorithm {
 
         int ptLength = cipher.update(context, 0, context.length, plainText, 0);
         ptLength += cipher.doFinal(plainText, ptLength);
-
-        plainText = Base64.getEncoder().encode(plainText);
 
         return plainText;
     }
