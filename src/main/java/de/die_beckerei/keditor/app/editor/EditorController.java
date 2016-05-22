@@ -5,16 +5,18 @@ import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
 import de.die_beckerei.keditor.app.editor.tab.EditorTab;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import javax.crypto.NoSuchPaddingException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -149,6 +151,19 @@ public class EditorController {
 
     public void encryptToAES() throws Exception {
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AESEncryptionDialog.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        AESEncryptionDialogController controller = fxmlLoader.getController();
+        controller.setDocument(this.getCurrentDocument());
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UTILITY);
+        stage.setTitle("AES Encryption Dialog");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        /*
         File file = this.newFileChooser("Save as ...");
 
         Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES);
@@ -163,10 +178,12 @@ public class EditorController {
 
         Document.save(newdoc);
 
+         */
+
     }
 
     public void encryptFromAES() throws Exception {
-
+/*
         Document currentDoc = this.getCurrentDocument();
 
         Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES);
@@ -179,6 +196,6 @@ public class EditorController {
         EditorTab newTab = new EditorTab(newdoc);
 
         this.addNewTab(newTab, true);
-
+*/
     }
 }
