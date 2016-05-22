@@ -1,11 +1,18 @@
 package de.die_beckerei.keditor.app.editor;
 
+import de.die_beckerei.keditor.app.crypto.CipherFactory;
 import de.die_beckerei.keditor.app.crypto.CipherSettings;
+import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.print.Doc;
+import java.io.File;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 /**
  * Created by Flo on 22.05.16.
@@ -22,6 +29,7 @@ public class AESEncryptionDialogController {
     TextField AESPassword;
 
     private Document document;
+    private EditorController editorController;
 
     public void initialize() {
 
@@ -50,22 +58,25 @@ public class AESEncryptionDialogController {
         CipherSettings.BLOCK blockMode = (CipherSettings.BLOCK) AESComboBlockMode.getSelectionModel().getSelectedItem();
         String key = AESPassword.getText();
 
+        File file = this.editorController.newFileChooser("Save as ...", AESComboBlockMode.getScene().getWindow());
 
+        CipherSettings settings = new CipherSettings();
+        settings.setPadding(padding);
+        settings.setBlockmode(blockMode);
+        settings.setKey(key);
 
-        /*File file = this.newFileChooser("Save as ...");
+        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES, settings);
 
-        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES);
-        Document currentDoc = this.getCurrentDocument();
-        byte[] asByte = currentDoc.toByte();
-        byte[] encrypted = cipher.encrypt(asByte);
+        byte[] contentAsByte = this.document.toByte();
+        byte[] encrypted = cipher.encrypt(contentAsByte);
 
-        ArrayList<String> newLine = new ArrayList<>();
-        newLine.add(new String(encrypted, Charset.forName(Document.charset)));
+        ArrayList<String> line = new ArrayList<>();
+        line.add(new String(encrypted, Charset.forName(Document.charset)));
 
-        Document newdoc = Document.newInstance(file.toPath(), newLine);
+        Document newDoc = Document.newInstance(file.toPath(), line);
+        Document.save(newDoc);
 
-        Document.save(newdoc);*/
-
+        this.cancelDialog();
     }
 
     @FXML
@@ -76,5 +87,9 @@ public class AESEncryptionDialogController {
 
     public void setDocument(Document document) {
         this.document = document;
+    }
+
+    public void setEditorController(EditorController controller) {
+        this.editorController = controller;
     }
 }
