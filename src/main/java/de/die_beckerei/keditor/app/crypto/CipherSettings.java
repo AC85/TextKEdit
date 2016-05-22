@@ -5,6 +5,10 @@ package de.die_beckerei.keditor.app.crypto;
  */
 public class CipherSettings {
 
+    private PADDING padding;
+    private BLOCK blockmode;
+    private String key;
+
     public enum PADDING {
         NoPadding ("No Padding"),
         PKCS5 ("PKCS5"),
@@ -15,6 +19,11 @@ public class CipherSettings {
 
         PADDING(String s) {
             name = s;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
         }
     }
 
@@ -28,5 +37,34 @@ public class CipherSettings {
         BLOCK(String s) {
             name = s;
         }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+    }
+
+    public void setPadding(PADDING padding) {
+        this.padding = padding;
+    }
+
+    public void setBlockmode(BLOCK blockmode) {
+        this.blockmode = blockmode;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public PADDING getPadding() {
+        return padding;
+    }
+
+    public BLOCK getBlockmode() {
+        return blockmode;
+    }
+
+    public String getKey() {
+        return key;
     }
 }
