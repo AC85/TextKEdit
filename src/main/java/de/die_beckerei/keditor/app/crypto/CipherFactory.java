@@ -4,6 +4,7 @@ import de.die_beckerei.keditor.app.crypto.cipher.AES;
 import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
 import de.die_beckerei.keditor.app.crypto.cipher.DES;
 import de.die_beckerei.keditor.app.crypto.cipher.types.AES_NoPadding_ECB;
+import de.die_beckerei.keditor.app.crypto.cipher.types.AES_PKCS7_ECB;
 import de.die_beckerei.keditor.app.crypto.cipher.types.AlgoDES;
 import de.die_beckerei.keditor.app.crypto.cipher.types.Algorithm;
 
@@ -34,6 +35,7 @@ public class CipherFactory {
                 return CipherFactory.Algorithm_NoPadding(settings);
             case PKCS5:
             case PKCS7:
+                return  CipherFactory.Algorithm_PKCS7(settings);
             case ZeroByte:
             default:
                 throw new Exception("No padding mechanism set.");
@@ -49,6 +51,17 @@ public class CipherFactory {
             case CTS:
             default:
                 throw new Exception("No block cipher mode set.");
+        }
+    }
+
+    private static Algorithm Algorithm_PKCS7(CipherSettings settings) throws Exception {
+        switch (settings.getBlockmode()) {
+            case ECB:
+                return  new AES_PKCS7_ECB(settings);
+            case CBC:
+            case CTS:
+            default:
+                throw new Exception("No block cipher mode set");
         }
     }
 }
