@@ -8,6 +8,7 @@ public class CipherSettings {
     private PADDING padding;
     private BLOCK blockmode;
     private String key;
+    private String provider = "BC";
 
     public enum PADDING {
         NoPadding ("No Padding"),
@@ -66,5 +67,13 @@ public class CipherSettings {
 
     public String getKey() {
         return key;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 }

@@ -1,27 +1,22 @@
 package de.die_beckerei.keditor.app.crypto.cipher.types;
 
+import de.die_beckerei.keditor.app.crypto.CipherSettings;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.util.Base64;
 
-public class AlgoAES implements Algorithm {
-
-    byte[] keyBytes = new byte[] {
-        0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-        0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-        0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17
-    };
+/**
+ * uses AES with NoPadding and ECB
+ */
+public class AES_NoPadding_ECB implements Algorithm {
 
     Cipher cipher;
     SecretKeySpec key;
 
-    public AlgoAES() throws Exception {
-        this.cipher = Cipher.getInstance("AES/ECB/NoPadding", "BC");
-        this.key = new SecretKeySpec(keyBytes, "AES");
+    public AES_NoPadding_ECB(CipherSettings settings) throws Exception {
+
+        this.cipher = Cipher.getInstance("AES/ECB/NoPadding", settings.getProvider());
+        this.key = new SecretKeySpec(settings.getKey().getBytes(), "AES");
 
     }
 
