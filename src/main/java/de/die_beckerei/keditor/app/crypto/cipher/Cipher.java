@@ -28,7 +28,7 @@ public abstract class Cipher {
 
     private boolean validateSettings() {
         //keep it simple, check only if settings are set
-        return !(this.settings.getBlockmode() == null || this.settings.getPadding() == null || this.settings.getKey() == null);
+        return !(this.settings.getBlockmode() == null || this.settings.getPadding() == null || this.settings.getKey() == null || this.settings.getKey().isEmpty());
     }
 
     public byte[] encrypt(byte[] context) throws Exception {
