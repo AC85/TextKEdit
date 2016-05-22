@@ -1,6 +1,7 @@
 package de.die_beckerei.keditor.app.crypto.cipher.types;
 
 import de.die_beckerei.keditor.app.crypto.CipherSettings;
+import de.die_beckerei.keditor.app.file.Document;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -16,7 +17,7 @@ public class AES_NoPadding_ECB implements Algorithm {
     public AES_NoPadding_ECB(CipherSettings settings) throws Exception {
 
         this.cipher = Cipher.getInstance("AES/ECB/NoPadding", settings.getProvider());
-        this.key = new SecretKeySpec(settings.getKey().getBytes(), "AES");
+        this.key = new SecretKeySpec(settings.getKey().getBytes(Document.charset), "AES");
 
     }
 

@@ -88,7 +88,7 @@ public class Document {
         List<Byte> output = new ArrayList<>();
 
         for(String line : this.content) {
-            byte[] c = line.getBytes();
+            byte[] c = line.getBytes(); //TODO: set charset
             for(byte b : c) {
                 output.add(b);
             }
