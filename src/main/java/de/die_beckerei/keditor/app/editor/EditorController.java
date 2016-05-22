@@ -29,12 +29,16 @@ public class EditorController {
     @FXML
     private TabPane tabbar;
 
+    private UiHelper uiHelper;
+
 
     /**
      * will be executed on controller instantiation
      */
     @FXML
     private void initialize() {
+
+        this.uiHelper = new UiHelper();
 
         //onSelectionChanged is triggered on startup and will create a new empty document by default
     }
@@ -120,18 +124,8 @@ public class EditorController {
         Document.save(document);
     }
 
-    protected File newFileChooser(String title, Window ownerWindow) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(title);
-        return fileChooser.showSaveDialog(ownerWindow);
-    }
-
-    private File newFileChooser(String title) {
-        return this.newFileChooser(title, null);
-    }
-
     public void saveAs() throws IOException {
-        File file = this.newFileChooser("Save as ...");
+        File file = this.uiHelper.newFileChooser("Save as ...");
 
         Document document = Document.newInstance(file.toPath(), this.getContentFromCurrentTab());
 
@@ -153,7 +147,7 @@ public class EditorController {
     public void encryptToAES() throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AESEncryptionDialog.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         AESEncryptionDialogController controller = fxmlLoader.getController();
         controller.setDocument(this.getCurrentDocument());
         controller.setEditorController(this);
@@ -164,24 +158,6 @@ public class EditorController {
         stage.setTitle("AES Encryption Dialog");
         stage.setScene(new Scene(root));
         stage.show();
-
-        /*
-        File file = this.newFileChooser("Save as ...");
-
-        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES);
-        Document currentDoc = this.getCurrentDocument();
-        byte[] asByte = currentDoc.toByte();
-        byte[] encrypted = cipher.encrypt(asByte);
-
-        ArrayList<String> newLine = new ArrayList<>();
-        newLine.add(new String(encrypted, Charset.forName(Document.charset)));
-
-        Document newdoc = Document.newInstance(file.toPath(), newLine);
-
-        Document.save(newdoc);
-
-         */
-
     }
 
     public void encryptFromAES() throws Exception {

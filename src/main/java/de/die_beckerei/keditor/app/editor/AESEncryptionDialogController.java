@@ -30,8 +30,11 @@ public class AESEncryptionDialogController {
 
     private Document document;
     private EditorController editorController;
+    private UiHelper uiHelper;
 
     public void initialize() {
+
+        this.uiHelper = new UiHelper();
 
         //set available Paddings
         AESComboPadding.getItems().setAll(CipherSettings.PADDING.values());
@@ -58,7 +61,7 @@ public class AESEncryptionDialogController {
         CipherSettings.BLOCK blockMode = (CipherSettings.BLOCK) AESComboBlockMode.getSelectionModel().getSelectedItem();
         String key = AESPassword.getText();
 
-        File file = this.editorController.newFileChooser("Save as ...", AESComboBlockMode.getScene().getWindow());
+        File file = this.uiHelper.newFileChooser("Save as ...", AESComboBlockMode.getScene().getWindow());
 
         CipherSettings settings = new CipherSettings();
         settings.setPadding(padding);
