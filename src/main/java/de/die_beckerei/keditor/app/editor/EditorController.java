@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -123,10 +120,14 @@ public class EditorController {
         Document.save(document);
     }
 
-    private File newFileChooser(String title) {
+    protected File newFileChooser(String title, Window ownerWindow) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(title);
-        return fileChooser.showSaveDialog(null);
+        return fileChooser.showSaveDialog(ownerWindow);
+    }
+
+    private File newFileChooser(String title) {
+        return this.newFileChooser(title, null);
     }
 
     public void saveAs() throws IOException {
@@ -155,6 +156,7 @@ public class EditorController {
         Parent root = (Parent) fxmlLoader.load();
         AESEncryptionDialogController controller = fxmlLoader.getController();
         controller.setDocument(this.getCurrentDocument());
+        controller.setEditorController(this);
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
