@@ -34,9 +34,9 @@
               <Label text="Padding" GridPane.rowIndex="1" />
               <ComboBox fx:id="DecryptComboPadding" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               <Label text="Cipher Block Mode" GridPane.rowIndex="2" />
-              <ComboBox fx:id="DecryptComboBlocMode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              <ComboBox fx:id="DecryptComboBlockMode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
               <Label text="Password" GridPane.rowIndex="3" />
-              <TextField fx:id="DecryptPaswsord" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+              <TextField fx:id="DecryptPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
           </children>
           <VBox.margin>
               <Insets left="10.0" right="10.0" />
