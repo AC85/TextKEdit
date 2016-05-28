@@ -144,7 +144,7 @@ public class EditorController {
         return editorTab.getDocument().getContent();
     }
 
-    public void encryptToAES() throws Exception {
+    public void openEncryptionDialog() throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AESEncryptionDialog.fxml"));
         Parent root = fxmlLoader.load();
@@ -160,7 +160,7 @@ public class EditorController {
         stage.show();
     }
 
-    public void encryptFromAES() throws Exception {
+    public void openDecryptionDialog() throws Exception {
 /*
         Document currentDoc = this.getCurrentDocument();
 
