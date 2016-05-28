@@ -21,7 +21,7 @@ public class CipherFactory {
             case AES:
                 return new AES(usedAlgo, settings);
             case DES:
-                return new DES(new AlgoDES());
+                return new DES(new AlgoDES(), settings);
             default:
                 return null;
         }
