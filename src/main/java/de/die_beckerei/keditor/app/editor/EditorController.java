@@ -1,7 +1,5 @@
 package de.die_beckerei.keditor.app.editor;
 
-import de.die_beckerei.keditor.app.crypto.CipherFactory;
-import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
 import de.die_beckerei.keditor.app.editor.tab.EditorTab;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
@@ -13,8 +11,6 @@ import javafx.stage.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -146,16 +142,16 @@ public class EditorController {
 
     public void openEncryptionDialog() throws Exception {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AESEncryptionDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EncryptionDialog.fxml"));
         Parent root = fxmlLoader.load();
-        AESEncryptionDialogController controller = fxmlLoader.getController();
+        EncryptionDialogController controller = fxmlLoader.getController();
         controller.setDocument(this.getCurrentDocument());
         controller.setEditorController(this);
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UTILITY);
-        stage.setTitle("AES Encryption Dialog");
+        stage.setTitle("Encryption File");
         stage.setScene(new Scene(root));
         stage.show();
     }
