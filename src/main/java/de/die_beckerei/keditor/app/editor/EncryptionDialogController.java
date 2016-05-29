@@ -63,6 +63,7 @@ public class EncryptionDialogController {
             throw new Exception("No Document set for encryption.");
 
         //gather encryption info
+        Cipher.TYPE cipherType = (Cipher.TYPE) ComboCipher.getSelectionModel().getSelectedItem();
         CipherSettings.PADDING padding = (CipherSettings.PADDING) ComboPadding.getSelectionModel().getSelectedItem();
         CipherSettings.BLOCK blockMode = (CipherSettings.BLOCK) ComboBlockMode.getSelectionModel().getSelectedItem();
         String key = Password.getText();
@@ -74,7 +75,7 @@ public class EncryptionDialogController {
         settings.setBlockmode(blockMode);
         settings.setKey(key);
 
-        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES, settings);
+        Cipher cipher = CipherFactory.getInstance(cipherType, settings);
 
         byte[] contentAsByte = this.document.toByte();
         byte[] encrypted = cipher.encrypt(contentAsByte);
