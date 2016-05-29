@@ -2,24 +2,19 @@ package de.die_beckerei.keditor.app;
 
 import de.die_beckerei.keditor.app.editor.EditorController;
 import de.die_beckerei.keditor.app.file.Document;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 
-import javax.crypto.NoSuchPaddingException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.ResourceBundle;
 
 /**
