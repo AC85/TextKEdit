@@ -30,17 +30,13 @@
               </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Encrypt">
-              <items>
-                <MenuItem disable="true" mnemonicParsing="false" text="as DES ..." />
-                  <MenuItem mnemonicParsing="false" onAction="#encryptToAES" text="as AES ..." />
-              </items>
-            </Menu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onEncrypt" text="Encrypt ..." />
+               </items></Menu>
             <Menu mnemonicParsing="false" text="Decrypt">
-              <items>
-                  <MenuItem mnemonicParsing="false" disable="true" text="from DES ..." />
-                <MenuItem mnemonicParsing="false" onAction="#decryptFromAES" text="from AES ..." />
-              </items>
-            </Menu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onDecrypt" text="Decrypt ..." />
+               </items></Menu>
         </menus>
       </MenuBar>
    </top>

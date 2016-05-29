@@ -9,7 +9,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.print.Doc;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -17,16 +16,19 @@ import java.util.ArrayList;
 /**
  * Created by Flo on 22.05.16.
  */
-public class AESEncryptionDialogController {
+public class EncryptionDialogController {
 
     @FXML
-    ComboBox AESComboPadding;
+    ComboBox ComboCipher;
 
     @FXML
-    ComboBox AESComboBlockMode;
+    ComboBox ComboPadding;
 
     @FXML
-    TextField AESPassword;
+    ComboBox ComboBlockMode;
+
+    @FXML
+    TextField Password;
 
     private Document document;
     private EditorController editorController;
@@ -36,13 +38,17 @@ public class AESEncryptionDialogController {
 
         this.uiHelper = new UiHelper();
 
+        //set available Ciphers
+        ComboCipher.getItems().setAll(Cipher.TYPE.values());
+        ComboCipher.getSelectionModel().selectFirst();
+
         //set available Paddings
-        AESComboPadding.getItems().setAll(CipherSettings.PADDING.values());
-        AESComboPadding.getSelectionModel().selectFirst();
+        ComboPadding.getItems().setAll(CipherSettings.PADDING.values());
+        ComboPadding.getSelectionModel().selectFirst();
 
         //set available BlockModes
-        AESComboBlockMode.getItems().setAll(CipherSettings.BLOCK.values());
-        AESComboBlockMode.getSelectionModel().selectFirst();
+        ComboBlockMode.getItems().setAll(CipherSettings.BLOCK.values());
+        ComboBlockMode.getSelectionModel().selectFirst();
 
     }
 
@@ -57,18 +63,19 @@ public class AESEncryptionDialogController {
             throw new Exception("No Document set for encryption.");
 
         //gather encryption info
-        CipherSettings.PADDING padding = (CipherSettings.PADDING) AESComboPadding.getSelectionModel().getSelectedItem();
-        CipherSettings.BLOCK blockMode = (CipherSettings.BLOCK) AESComboBlockMode.getSelectionModel().getSelectedItem();
-        String key = AESPassword.getText();
+        Cipher.TYPE cipherType = (Cipher.TYPE) ComboCipher.getSelectionModel().getSelectedItem();
+        CipherSettings.PADDING padding = (CipherSettings.PADDING) ComboPadding.getSelectionModel().getSelectedItem();
+        CipherSettings.BLOCK blockMode = (CipherSettings.BLOCK) ComboBlockMode.getSelectionModel().getSelectedItem();
+        String key = Password.getText();
 
-        File file = this.uiHelper.newFileChooser("Save as ...", AESComboBlockMode.getScene().getWindow());
+        File file = this.uiHelper.newFileChooser("Save as ...", ComboBlockMode.getScene().getWindow());
 
         CipherSettings settings = new CipherSettings();
         settings.setPadding(padding);
         settings.setBlockmode(blockMode);
         settings.setKey(key);
 
-        Cipher cipher = CipherFactory.getInstance(Cipher.TYPE.AES, settings);
+        Cipher cipher = CipherFactory.getInstance(cipherType, settings);
 
         byte[] contentAsByte = this.document.toByte();
         byte[] encrypted = cipher.encrypt(contentAsByte);
@@ -84,7 +91,7 @@ public class AESEncryptionDialogController {
 
     @FXML
     public void cancelDialog() {
-        Stage stage = (Stage) AESComboBlockMode.getScene().getWindow();
+        Stage stage = (Stage) ComboBlockMode.getScene().getWindow();
         stage.close();
     }
 
