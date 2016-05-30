@@ -1,7 +1,7 @@
-package de.die_beckerei.keditor.app;
+package keditor.app;
 
-import de.die_beckerei.keditor.app.editor.EditorController;
-import de.die_beckerei.keditor.app.file.Document;
+import keditor.app.editor.EditorController;
+import keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -18,8 +18,11 @@ import java.io.StringWriter;
 import java.util.ResourceBundle;
 
 /**
- * Created by Flo on 14.05.16.
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
+
 public class MainAppController {
 
     @FXML

@@ -1,12 +1,12 @@
-package de.die_beckerei.keditor.app.crypto;
+package keditor.app.crypto;
 
-import de.die_beckerei.keditor.app.crypto.cipher.AES;
-import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
-import de.die_beckerei.keditor.app.crypto.cipher.DES;
-import de.die_beckerei.keditor.app.crypto.cipher.types.AES_NoPadding_ECB;
-import de.die_beckerei.keditor.app.crypto.cipher.types.AES_PKCS7_ECB;
-import de.die_beckerei.keditor.app.crypto.cipher.types.AlgoDES;
-import de.die_beckerei.keditor.app.crypto.cipher.types.Algorithm;
+import keditor.app.crypto.cipher.AES;
+import keditor.app.crypto.cipher.Cipher;
+import keditor.app.crypto.cipher.DES;
+import keditor.app.crypto.cipher.types.AES_NoPadding_ECB;
+import keditor.app.crypto.cipher.types.AES_PKCS7_ECB;
+import keditor.app.crypto.cipher.types.AlgoDES;
+import keditor.app.crypto.cipher.types.Algorithm;
 
 /**
  * Alexander Christoph

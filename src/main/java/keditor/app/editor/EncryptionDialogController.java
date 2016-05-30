@@ -1,9 +1,9 @@
-package de.die_beckerei.keditor.app.editor;
+package keditor.app.editor;
 
-import de.die_beckerei.keditor.app.crypto.CipherFactory;
-import de.die_beckerei.keditor.app.crypto.CipherSettings;
-import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
-import de.die_beckerei.keditor.app.file.Document;
+import keditor.app.crypto.CipherFactory;
+import keditor.app.crypto.CipherSettings;
+import keditor.app.crypto.cipher.Cipher;
+import keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;

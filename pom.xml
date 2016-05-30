@@ -48,7 +48,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx-maven-plugin.version}</version>
                 <configuration>
-                    <mainClass>de.die_beckerei.keditor.app.MainApp</mainClass>
+                    <mainClass>keditor.app.MainApp</mainClass>
                 </configuration>
             </plugin>
 

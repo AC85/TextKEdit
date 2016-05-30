@@ -1,7 +1,7 @@
-package de.die_beckerei.keditor.app.crypto.cipher;
+package keditor.app.crypto.cipher;
 
-import de.die_beckerei.keditor.app.crypto.CipherSettings;
-import de.die_beckerei.keditor.app.crypto.cipher.types.Algorithm;
+import keditor.app.crypto.CipherSettings;
+import keditor.app.crypto.cipher.types.Algorithm;
 
 /**
  * Alexander Christoph

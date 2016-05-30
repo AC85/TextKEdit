@@ -1,7 +1,7 @@
-package de.die_beckerei.keditor.app.editor;
+package keditor.app.editor;
 
-import de.die_beckerei.keditor.app.editor.tab.EditorTab;
-import de.die_beckerei.keditor.app.file.Document;
+import keditor.app.editor.tab.EditorTab;
+import keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

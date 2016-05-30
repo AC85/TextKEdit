@@ -1,4 +1,4 @@
-package de.die_beckerei.keditor.app;
+package keditor.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package de.die_beckerei.keditor.app.file;
+package keditor.app.file;
 
 import com.google.common.primitives.Bytes;
 import javafx.beans.property.SimpleStringProperty;

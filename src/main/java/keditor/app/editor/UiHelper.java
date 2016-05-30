@@ -1,4 +1,4 @@
-package de.die_beckerei.keditor.app.editor;
+package keditor.app.editor;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;

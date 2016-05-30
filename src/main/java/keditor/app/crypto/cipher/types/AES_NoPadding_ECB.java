@@ -1,6 +1,6 @@
-package de.die_beckerei.keditor.app.crypto.cipher.types;
+package keditor.app.crypto.cipher.types;
 
-import de.die_beckerei.keditor.app.crypto.CipherSettings;
+import keditor.app.crypto.CipherSettings;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

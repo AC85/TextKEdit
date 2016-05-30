@@ -1,4 +1,4 @@
-package de.die_beckerei.keditor.app.crypto.cipher.types;
+package keditor.app.crypto.cipher.types;
 
 /**
  * Alexander Christoph

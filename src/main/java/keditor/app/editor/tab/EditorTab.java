@@ -1,6 +1,6 @@
-package de.die_beckerei.keditor.app.editor.tab;
+package keditor.app.editor.tab;
 
-import de.die_beckerei.keditor.app.file.Document;
+import keditor.app.file.Document;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 /**
  * This custom EditorTab construct its layout by adding a Textarea
- * It needs an de.die_beckerei.keditor.app.file.Document to construct itself
+ * It needs an Document to construct itself
  */
 public class EditorTab extends javafx.scene.control.Tab {
 
