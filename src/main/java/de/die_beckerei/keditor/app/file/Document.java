@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class Document {
 
-    public static final String charset = "UTF-8";
+    public static final String charset = "ISO-8859-1";
 
     private Path path;
 
