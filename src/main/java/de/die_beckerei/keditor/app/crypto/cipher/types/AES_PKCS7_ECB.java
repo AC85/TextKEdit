@@ -5,6 +5,8 @@ import de.die_beckerei.keditor.app.crypto.CipherSettings;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Arrays;
+
 /**
  *  uses AES with PKCS7 and ECB
  */
@@ -29,7 +31,7 @@ public class AES_PKCS7_ECB implements Algorithm {
     @Override
     public byte[] encrypt(byte[] context) throws Exception {
 
-        this.cipher.init(this.cipher.ENCRYPT_MODE, this.key);
+        this.cipher.init(Cipher.ENCRYPT_MODE, this.key);
 
         byte[] cipherText = new byte[this.cipher.getOutputSize(context.length)];
         int ctLength = this.cipher.update(context, 0, context.length, cipherText, 0);
@@ -41,12 +43,13 @@ public class AES_PKCS7_ECB implements Algorithm {
     @Override
     public byte[] decrypt(byte[] context) throws Exception {
 
-        this.cipher.init(this.cipher.DECRYPT_MODE, this.key);
+        this.cipher.init(Cipher.DECRYPT_MODE, this.key);
 
         byte[] plainText = new byte[this.cipher.getOutputSize(context.length)];
         int ptLength = cipher.update(context, 0, context.length, plainText, 0);
         ptLength += cipher.doFinal(plainText, ptLength);
 
-        return plainText;
+        //trim padding
+        return Arrays.copyOf(plainText, ptLength);
     }
 }
