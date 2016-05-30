@@ -23,17 +23,12 @@ import java.util.ResourceBundle;
 public class MainAppController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
     AnchorPane editorArea;
 
     private EditorController editorController;
 
-    @FXML
     private void initialize() {
         this.initEditor();
-
     }
 
     public void onOpen() {
