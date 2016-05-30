@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class Document {
 
-    public static final String charset = "ISO-8859-1";
+    public static final String charset = "UTF-8";
 
     private Path path;
 
@@ -88,7 +88,7 @@ public class Document {
         List<Byte> output = new ArrayList<>();
 
         for(String line : this.content) {
-            byte[] c = line.getBytes(); //TODO: set charset
+            byte[] c = line.getBytes(Charset.forName(Document.charset));
             for(byte b : c) {
                 output.add(b);
             }

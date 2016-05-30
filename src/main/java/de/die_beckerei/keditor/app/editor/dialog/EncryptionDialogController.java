@@ -33,9 +33,8 @@ public class EncryptionDialogController extends AbstractDialog {
     TextField Password;
 
     private Document document;
-    private EditorController editorController;
-    private UiHelper uiHelper;
 
+    @Override
     public void initialize() {
         super.initialize();
 
@@ -81,10 +80,10 @@ public class EncryptionDialogController extends AbstractDialog {
         byte[] contentAsByte = this.document.toByte();
         byte[] encrypted = cipher.encrypt(contentAsByte);
 
-        ArrayList<String> line = new ArrayList<>();
-        line.add(new String(encrypted, Charset.forName(Document.charset)));
+       // ArrayList<String> line = new ArrayList<>();
+       // line.add(new String(encrypted, Charset.forName(Document.charset)));
 
-        Document newDoc = Document.newInstance(file.toPath(), line);
+        Document newDoc = Document.newInstance(file.toPath(), encrypted);
         Document.save(newDoc);
 
         this.cancelDialog();

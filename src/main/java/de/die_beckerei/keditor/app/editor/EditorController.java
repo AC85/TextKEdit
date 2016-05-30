@@ -164,6 +164,7 @@ public class EditorController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dialog/DecryptionDialog.fxml"));
         Parent root = fxmlLoader.load();
         DecryptionDialogController controller = fxmlLoader.getController();
+        controller.setDocument(this.getCurrentDocument());
         controller.setParentController(this);
 
         Stage stage = new Stage();
