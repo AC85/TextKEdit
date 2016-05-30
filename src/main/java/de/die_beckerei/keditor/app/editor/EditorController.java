@@ -1,5 +1,7 @@
 package de.die_beckerei.keditor.app.editor;
 
+import de.die_beckerei.keditor.app.editor.dialog.DecryptionDialogController;
+import de.die_beckerei.keditor.app.editor.dialog.EncryptionDialogController;
 import de.die_beckerei.keditor.app.editor.tab.EditorTab;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
@@ -142,11 +144,11 @@ public class EditorController {
 
     public void openEncryptionDialog() throws Exception {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EncryptionDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dialog/EncryptionDialog.fxml"));
         Parent root = fxmlLoader.load();
         EncryptionDialogController controller = fxmlLoader.getController();
         controller.setDocument(this.getCurrentDocument());
-        controller.setEditorController(this);
+        controller.setParentController(this);
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -154,9 +156,23 @@ public class EditorController {
         stage.setTitle("Encryption File");
         stage.setScene(new Scene(root));
         stage.show();
+        controller.setStage(stage);
     }
 
     public void openDecryptionDialog() throws Exception {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dialog/DecryptionDialog.fxml"));
+        Parent root = fxmlLoader.load();
+        DecryptionDialogController controller = fxmlLoader.getController();
+        controller.setParentController(this);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UTILITY);
+        stage.setTitle("Decrypt File");
+        stage.setScene(new Scene(root));
+        stage.show();
+        controller.setStage(stage);
 /*
         Document currentDoc = this.getCurrentDocument();
 

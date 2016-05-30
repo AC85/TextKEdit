@@ -1,8 +1,10 @@
-package de.die_beckerei.keditor.app.editor;
+package de.die_beckerei.keditor.app.editor.dialog;
 
 import de.die_beckerei.keditor.app.crypto.CipherFactory;
 import de.die_beckerei.keditor.app.crypto.CipherSettings;
 import de.die_beckerei.keditor.app.crypto.cipher.Cipher;
+import de.die_beckerei.keditor.app.editor.EditorController;
+import de.die_beckerei.keditor.app.editor.UiHelper;
 import de.die_beckerei.keditor.app.file.Document;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Flo on 22.05.16.
  */
-public class EncryptionDialogController {
+public class EncryptionDialogController extends AbstractDialog {
 
     @FXML
     ComboBox ComboCipher;
@@ -35,8 +37,7 @@ public class EncryptionDialogController {
     private UiHelper uiHelper;
 
     public void initialize() {
-
-        this.uiHelper = new UiHelper();
+        super.initialize();
 
         //set available Ciphers
         ComboCipher.getItems().setAll(Cipher.TYPE.values());
@@ -89,17 +90,8 @@ public class EncryptionDialogController {
         this.cancelDialog();
     }
 
-    @FXML
-    public void cancelDialog() {
-        Stage stage = (Stage) ComboBlockMode.getScene().getWindow();
-        stage.close();
-    }
-
     public void setDocument(Document document) {
         this.document = document;
     }
 
-    public void setEditorController(EditorController controller) {
-        this.editorController = controller;
-    }
 }
