@@ -9,7 +9,9 @@ import de.die_beckerei.keditor.app.crypto.cipher.types.AlgoDES;
 import de.die_beckerei.keditor.app.crypto.cipher.types.Algorithm;
 
 /**
- *
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
 public class CipherFactory {
 

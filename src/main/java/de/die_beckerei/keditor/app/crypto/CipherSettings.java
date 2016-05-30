@@ -1,7 +1,9 @@
 package de.die_beckerei.keditor.app.crypto;
 
 /**
- * Created by Flo on 21.05.16.
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
 public class CipherSettings {
 

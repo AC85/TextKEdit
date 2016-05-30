@@ -14,7 +14,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 /**
- * Created by Flo on 22.05.16.
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
 public class EncryptionDialogController {
 

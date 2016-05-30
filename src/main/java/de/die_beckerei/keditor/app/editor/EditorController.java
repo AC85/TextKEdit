@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Created by Flo on 14.05.16.
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
 public class EditorController {
 

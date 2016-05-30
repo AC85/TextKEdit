@@ -1,10 +1,15 @@
 package de.die_beckerei.keditor.app.crypto.cipher.types;
 
 import de.die_beckerei.keditor.app.crypto.CipherSettings;
-import de.die_beckerei.keditor.app.file.Document;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+
+/**
+ * Alexander Christoph
+ * 634389
+ * BMI
+ */
 
 /**
  * uses AES with NoPadding and ECB

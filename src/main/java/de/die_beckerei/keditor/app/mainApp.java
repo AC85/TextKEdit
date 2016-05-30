@@ -6,8 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Created by Flo on 14.05.16.
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
+
 public class MainApp extends Application {
 
     private Stage primaryStage;

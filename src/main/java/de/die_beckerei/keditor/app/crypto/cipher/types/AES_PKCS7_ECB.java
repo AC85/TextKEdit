@@ -6,6 +6,11 @@ import de.die_beckerei.keditor.app.crypto.CipherSettings;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 /**
+ * Alexander Christoph
+ * 634389
+ * BMI
+ */
+/**
  *  uses AES with PKCS7 and ECB
  */
 public class AES_PKCS7_ECB implements Algorithm {

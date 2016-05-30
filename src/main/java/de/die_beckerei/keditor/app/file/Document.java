@@ -3,13 +3,9 @@ package de.die_beckerei.keditor.app.file;
 import com.google.common.primitives.Bytes;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.bouncycastle.util.encoders.Hex;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,7 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Flo on 15.05.16.
+ * Alexander Christoph
+ * 634389
+ * BMI
  */
 public class Document {
 

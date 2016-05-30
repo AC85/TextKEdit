@@ -6,6 +6,12 @@ import javafx.stage.Window;
 import java.io.File;
 
 /**
+ * Alexander Christoph
+ * 634389
+ * BMI
+ */
+
+/**
  * UI Helper to avoid duplicate code and have common UI Task in one place
  */
 public class UiHelper {

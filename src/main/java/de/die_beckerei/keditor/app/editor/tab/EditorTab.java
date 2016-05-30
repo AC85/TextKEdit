@@ -1,7 +1,6 @@
 package de.die_beckerei.keditor.app.editor.tab;
 
 import de.die_beckerei.keditor.app.file.Document;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -9,6 +8,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.util.Arrays;
+
+/**
+ * Alexander Christoph
+ * 634389
+ * BMI
+ */
 
 /**
  * This custom EditorTab construct its layout by adding a Textarea
