@@ -5,7 +5,6 @@ import keditor.app.crypto.cipher.types.Algorithm;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 public abstract class Cipher {

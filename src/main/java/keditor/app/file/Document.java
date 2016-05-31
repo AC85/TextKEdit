@@ -14,7 +14,6 @@ import java.util.List;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 public class Document {

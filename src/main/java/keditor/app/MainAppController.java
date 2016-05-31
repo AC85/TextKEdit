@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 

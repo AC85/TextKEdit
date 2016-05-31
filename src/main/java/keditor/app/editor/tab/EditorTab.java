@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 

@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 

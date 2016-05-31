@@ -7,7 +7,6 @@ import java.io.File;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 

@@ -2,7 +2,6 @@ package keditor.app.crypto;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 public class CipherSettings {

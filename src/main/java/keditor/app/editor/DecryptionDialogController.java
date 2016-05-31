@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 public class DecryptionDialogController {

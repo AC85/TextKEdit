@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 public class EncryptionDialogController {

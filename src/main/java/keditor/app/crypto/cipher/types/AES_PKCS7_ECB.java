@@ -7,7 +7,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 /**

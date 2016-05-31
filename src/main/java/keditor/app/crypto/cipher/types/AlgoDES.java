@@ -2,7 +2,6 @@ package keditor.app.crypto.cipher.types;
 
 /**
  * Alexander Christoph
- * 634389
  * BMI
  */
 
