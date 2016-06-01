@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.die_beckerei.keditor.app.editor.dialog.editor.EncryptionDialogController">
+   <children>
+      <Pane prefHeight="35.0" prefWidth="600.0">
+         <children>
+            <Label text="Ecryption Settings" styleClass="headline">
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+      <GridPane prefHeight="299.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="194.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="406.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+             <Label text="Cipher" />
+             <ComboBox fx:id="ComboCipher" prefWidth="150.0" GridPane.columnIndex="1" />
+            <Label text="Padding" GridPane.rowIndex="1" />
+            <ComboBox fx:id="ComboPadding" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Cipher Block Mode" GridPane.rowIndex="2" />
+            <ComboBox fx:id="ComboBlockMode" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Password" GridPane.rowIndex="3" />
+            <TextField fx:id="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </GridPane>
+      <ToolBar prefHeight="40.0" prefWidth="600.0">
+         <items>
+             <Button text="Cancel" onAction="#cancelDialog"/>
+             <Pane HBox.hgrow="ALWAYS" />
+             <Button text="Save as encrypted ..." onAction="#encrypt"/>
+         </items>
+      </ToolBar>
+   </children>
+</VBox>
