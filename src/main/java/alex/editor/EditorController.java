@@ -2,8 +2,14 @@ package alex.editor;
 
 import alex.file.Document;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,5 +79,29 @@ public class EditorController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void openEncryptionDialog() {
+
+        try {
+            //neues Fenster mit dem Encryption Dialog erzeugen
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/CipherDialog.fxml"));
+            Parent root = fxmlLoader.load();
+            EncryptionDialogController controller = fxmlLoader.getController();
+
+            //Dialog vorbereiten
+            controller.setDocument(this.currentDocument);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setTitle("Encryption File");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

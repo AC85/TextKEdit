@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alex.editor.EncryptionDialogController">
+   <children>
+      <Label text="Label" />
+      <HBox prefHeight="360.0" prefWidth="600.0">
+         <children>
+            <ListView prefHeight="310.0" prefWidth="200.0" fx:id="cipherList" />
+            <ListView prefHeight="200.0" prefWidth="200.0" fx:id="modeList" />
+            <ListView prefHeight="200.0" prefWidth="200.0" fx:id="paddingList"/>
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" text="Encrypt ..." />
+   </children>
+</VBox>
