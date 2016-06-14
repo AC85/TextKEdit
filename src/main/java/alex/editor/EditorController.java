@@ -107,4 +107,21 @@ public class EditorController {
 
 
     }
+
+    public void onSaveXML() {
+        this.currentDocument.setPayload( this.editorArea.getText() );
+
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save file ...");
+
+        File file = fileChooser.showSaveDialog(null);
+
+        if(file != null) {
+            this.currentDocument.setFile(file);
+        }
+
+        //bereits gespeichertes Document überschreiben
+        DocumentService.saveAsXml(this.currentDocument);
+    }
 }

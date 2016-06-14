@@ -21,6 +21,8 @@
                         <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP" shortcut="DOWN" />
                      </accelerator>
                   </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#onSaveXML" text="Save as XML">
+                </MenuItem>
             </items>
           </Menu>
         </menus>

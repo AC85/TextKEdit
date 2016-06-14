@@ -1,5 +1,6 @@
 package alex.file;
 
+import javax.xml.bind.JAXB;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,5 +40,9 @@ public class DocumentService {
      */
     public static void save(Document document) throws IOException {
         Files.write(document.getFile().toPath(), document.getPayload());
+    }
+
+    public static void saveAsXml(Document document) {
+        JAXB.marshal(document, document.getFile());
     }
 }
