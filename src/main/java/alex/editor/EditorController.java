@@ -1,6 +1,7 @@
 package alex.editor;
 
 import alex.file.Document;
+import alex.file.DocumentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,11 +32,7 @@ public class EditorController {
     @FXML
     private void initialize()  {
         //leeres Dokument erstellen
-        try {
-            this.currentDocument = new Document(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.currentDocument = DocumentService.getEmpty();
     }
 
     public void onOpen()  {
@@ -46,7 +43,7 @@ public class EditorController {
 
         if(file != null) {
             try {
-                Document document = new Document(file.toPath());
+                Document document = DocumentService.load(file);
 
                 this.currentDocument = document;
 
@@ -59,10 +56,15 @@ public class EditorController {
         }
     }
 
+    /**
+     * Speichert ein Document ab,
+     * ist im Document keine Pfadangabe wird der Nutzer nach einer gefragt
+     */
     public void onSave() {
         this.currentDocument.setPayload( this.editorArea.getText() );
 
         try {
+            //wenn kein Pfad im Document vorhanden ist, einen sezten lassen
             if(this.currentDocument.isTransient()) {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save file ...");
@@ -70,11 +72,12 @@ public class EditorController {
                 File file = fileChooser.showSaveDialog(null);
 
                 if(file != null) {
-                    this.currentDocument.setPath(file.toPath());
+                    this.currentDocument.setFile(file);
                 }
             }
 
-            this.currentDocument.save();
+            //bereits gespeichertes Document überschreiben
+            DocumentService.save(this.currentDocument);
 
         } catch (IOException e) {
             e.printStackTrace();
