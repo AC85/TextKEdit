@@ -14,14 +14,12 @@ public class CipherSettings {
     public enum MODE {
         ECB,
         CBC,
-        CTS
+        GCM
     }
 
     public enum PADDING {
-        NoPadding,
         PKCS5,
-        PKCS7,
-        ZeroBytePadding
+        PKCS7
     }
 
     private CIPHER cipher;
@@ -66,8 +64,17 @@ public class CipherSettings {
         this.provider = provider;
     }
 
+    public byte[] getIv() {
+        return iv;
+    }
+
+    public void setIv(byte[] iv) {
+        this.iv = iv;
+    }
+
     private MODE mode;
     private PADDING padding;
     private String key;
     private String provider = "BC";
+    private byte[] iv;
 }
