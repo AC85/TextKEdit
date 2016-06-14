@@ -2,10 +2,8 @@ package alex.file;
 
 import de.die_beckerei.keditor.app.crypto.CipherSettings;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Created by alexanderchristoph on 03.06.16.
@@ -16,13 +14,11 @@ public class Document {
 
     private byte[] payload;
 
-    private Path path;
-
     private CipherSettings cipherSettings;
 
     protected Document() {
         this.payload = new byte[0];
-        this.path = null;
+        this.file = null;
         this.cipherSettings = null;
     }
 
@@ -43,6 +39,7 @@ public class Document {
         this.payload = payload.getBytes();
     }
 
+    @XmlTransient
     public String getPayloadAsString() {
         return new String(this.payload);
     }
@@ -52,17 +49,10 @@ public class Document {
     }
 
     public boolean isTransient() {
-        return (this.path == null);
+        return (this.file == null);
     }
 
-    public void setPath(Path path) {
-        this.path = path;
-    }
-
-    public void save() throws IOException {
-        Files.write(this.path, this.getPayload());
-    }
-
+    @XmlTransient
     public File getFile() {
         return file;
     }
