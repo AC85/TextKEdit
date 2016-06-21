@@ -1,5 +1,8 @@
 package alex.file;
 
+import alex.cipher.Cipher;
+import alex.cipher.CipherFactory;
+
 import javax.xml.bind.JAXB;
 import java.io.File;
 import java.io.IOException;
@@ -44,5 +47,25 @@ public class DocumentService {
 
     public static void saveAsXml(Document document) {
         JAXB.marshal(document, document.getFile());
+    }
+
+    public static Document encrypt(Document document) {
+
+        Cipher cipher = CipherFactory.getInstance(document.getCipherSettings());
+
+        byte[] plaintext = document.getPayload();
+        byte[] ciphertext = cipher.encrypt(plaintext);
+
+        Document encryptedDoc = new Document();
+        encryptedDoc.setPayload(ciphertext);
+        encryptedDoc.setEncrypted(true);
+        encryptedDoc.setCipherSettings(document.getCipherSettings());
+
+        return encryptedDoc;
+    }
+
+    public static Document decrypt(Document document) {
+
+        return document;
     }
 }

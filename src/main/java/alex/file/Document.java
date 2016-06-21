@@ -1,13 +1,15 @@
 package alex.file;
 
-import de.die_beckerei.keditor.app.crypto.CipherSettings;
+import alex.cipher.CipherSettings;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.File;
 
 /**
  * Created by alexanderchristoph on 03.06.16.
  */
+@XmlRootElement
 public class Document {
 
     private File file;
@@ -15,6 +17,8 @@ public class Document {
     private byte[] payload;
 
     private CipherSettings cipherSettings;
+
+    private boolean encrypted = false;
 
     protected Document() {
         this.payload = new byte[0];
@@ -59,5 +63,22 @@ public class Document {
 
     public void setFile(File file) {
         this.file = file;
+    }
+
+    @XmlTransient
+    public boolean isEncrypted() {
+        return encrypted;
+    }
+
+    public void setEncrypted(boolean encrypted) {
+        this.encrypted = encrypted;
+    }
+
+    public CipherSettings getCipherSettings() {
+        return cipherSettings;
+    }
+
+    public void setCipherSettings(CipherSettings cipherSettings) {
+        this.cipherSettings = cipherSettings;
     }
 }

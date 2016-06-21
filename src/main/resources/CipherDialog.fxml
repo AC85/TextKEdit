@@ -9,11 +9,11 @@
       <Label text="Label" />
       <HBox prefHeight="360.0" prefWidth="600.0">
          <children>
-            <ListView prefHeight="310.0" prefWidth="200.0" fx:id="cipherList" />
-            <ListView prefHeight="200.0" prefWidth="200.0" fx:id="modeList" />
-            <ListView prefHeight="200.0" prefWidth="200.0" fx:id="paddingList"/>
+            <ListView fx:id="cipherList" prefHeight="310.0" prefWidth="200.0" />
+            <ListView fx:id="modeList" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="paddingList" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </HBox>
-      <Button mnemonicParsing="false" text="Encrypt ..." />
+      <Button mnemonicParsing="false" onAction="#onEcrypt" text="Encrypt ..." />
    </children>
 </VBox>
