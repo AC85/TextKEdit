@@ -17,7 +17,11 @@ public class DecryptionDialogController {
     private EditorController parentController;
     private Stage stage;
 
+    /**
+     * Entschlüsselt das aktuelle Dokument
+     */
     public void onDecrypt() {
+        //TODO passwort auslesen
         Document decryptedDoc = DocumentService.decrypt(this.document);
         parentController.setDocument(decryptedDoc);
 

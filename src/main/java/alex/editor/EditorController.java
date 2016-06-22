@@ -36,6 +36,9 @@ public class EditorController {
         this.currentDocument = DocumentService.getEmpty();
     }
 
+    /**
+     * Erstellung einer neuen Datei
+     */
     public void onOpen()  {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File ...");
@@ -144,6 +147,9 @@ public class EditorController {
         }
     }
 
+    /**
+     * Speichern der Datei in XML
+     */
     public void onSaveXML() {
         this.currentDocument.setPayload( this.editorArea.getText() );
 
@@ -161,6 +167,11 @@ public class EditorController {
         DocumentService.saveAsXml(this.currentDocument);
     }
 
+    /**
+     *
+      * @param document
+     *  Setzen des ..................
+     */
     public void setDocument(Document document) {
         this.currentDocument = document;
         this.editorArea.setText(document.getPayloadAsString());
