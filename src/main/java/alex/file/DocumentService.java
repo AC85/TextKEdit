@@ -35,6 +35,10 @@ public class DocumentService {
         return doc;
     }
 
+    public static Document loadEncrypted(File file) {
+        return JAXB.unmarshal(file, Document.class);
+    }
+
     /**
      * Speichert das übergebene Document ab
      * Der Pfad findet sich im Document selbst (file)
@@ -65,7 +69,13 @@ public class DocumentService {
     }
 
     public static Document decrypt(Document document) {
+        Cipher cipher = CipherFactory.getInstance(document.getCipherSettings());
 
+        byte[] ciphertext = document.getPayload();
+        byte[] plaintext = cipher.decrypt(ciphertext);
+
+        Document decryptedDoc = new Document();
+        decryptedDoc.setPayload(plaintext);
         return document;
     }
 }

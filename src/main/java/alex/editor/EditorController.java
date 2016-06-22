@@ -28,6 +28,7 @@ public class EditorController {
 
     @FXML
     private ResourceBundle resourceBundle;
+    private Document document;
 
     @FXML
     private void initialize()  {
@@ -93,6 +94,7 @@ public class EditorController {
             EncryptionDialogController controller = fxmlLoader.getController();
 
             //Dialog vorbereiten
+            this.currentDocument.setPayload(this.editorArea.getText());
             controller.setDocument(this.currentDocument);
 
             Stage stage = new Stage();
@@ -104,8 +106,42 @@ public class EditorController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void openDecryptionDialog() {
+        //verschlüsselte Datei auswählen
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open encrypted file ...");
 
+        File file = fileChooser.showOpenDialog(null);
+
+        if(file != null) {
+            Document doc = DocumentService.loadEncrypted(file);
+            try {
+            //DecryptionDialog öffnen
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/DecryptDialog.fxml"));
+            Parent root = null;
+
+            root = fxmlLoader.load();
+
+            DecryptionDialogController controller = fxmlLoader.getController();
+
+            controller.setDocument(doc);
+            controller.setParentController(this);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setTitle("Decrypt File");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            controller.setStage(stage);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onSaveXML() {
@@ -123,5 +159,10 @@ public class EditorController {
 
         //bereits gespeichertes Document überschreiben
         DocumentService.saveAsXml(this.currentDocument);
+    }
+
+    public void setDocument(Document document) {
+        this.currentDocument = document;
+        this.editorArea.setText(document.getPayloadAsString());
     }
 }

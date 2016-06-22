@@ -35,7 +35,7 @@
       <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="Encrypt ..." onAction="#openEncryptionDialog" />
-            <Button mnemonicParsing="false" text="Decrypt ..." />
+            <Button mnemonicParsing="false" text="Decrypt ..." onAction="#openDecryptionDialog" />
          </children>
       </HBox>
    </bottom>
