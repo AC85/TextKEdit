@@ -34,12 +34,12 @@ public class EncryptionDialogController {
     }
 
     @FXML
-    protected void onEcrypt() {
+    protected void onEcrypt() throws Exception {
         //set ciphersettings
         CipherSettings settings = new CipherSettings();
-        settings.setCipher(CipherSettings.CIPHER.DES);
-        settings.setMode(CipherSettings.MODE.CBC);
-        settings.setPadding(CipherSettings.PADDING.PKCS5);
+        settings.setCipher((CipherSettings.CIPHER) cipherList.getSelectionModel().getSelectedItem());
+        settings.setMode((CipherSettings.MODE) modeList.getSelectionModel().getSelectedItem());
+        settings.setPadding((CipherSettings.PADDING) paddingList.getSelectionModel().getSelectedItem());
 
         this.document.setCipherSettings(settings);
 

@@ -20,9 +20,10 @@ public class DecryptionDialogController {
     /**
      * Entschlüsselt das aktuelle Dokument
      */
-    public void onDecrypt() {
+    public void onDecrypt() throws Exception {
         //TODO passwort auslesen
         Document decryptedDoc = DocumentService.decrypt(this.document);
+
         parentController.setDocument(decryptedDoc);
 
         this.stage.close();

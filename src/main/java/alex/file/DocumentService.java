@@ -53,7 +53,7 @@ public class DocumentService {
         JAXB.marshal(document, document.getFile());
     }
 
-    public static Document encrypt(Document document) {
+    public static Document encrypt(Document document) throws Exception {
 
         Cipher cipher = CipherFactory.getInstance(document.getCipherSettings());
 
@@ -68,7 +68,7 @@ public class DocumentService {
         return encryptedDoc;
     }
 
-    public static Document decrypt(Document document) {
+    public static Document decrypt(Document document) throws Exception {
         Cipher cipher = CipherFactory.getInstance(document.getCipherSettings());
 
         byte[] ciphertext = document.getPayload();
@@ -76,6 +76,6 @@ public class DocumentService {
 
         Document decryptedDoc = new Document();
         decryptedDoc.setPayload(plaintext);
-        return document;
+        return decryptedDoc;
     }
 }

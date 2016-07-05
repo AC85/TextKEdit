@@ -2,31 +2,38 @@ package alex.cipher;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.ShortBufferException;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.Arrays;
 
 /**
  * Created by alexanderchristoph on 21.06.16.
  */
-public class DES_PKCS5_CBC implements Cipher {
+public class DES implements Cipher {
 
     private CipherSettings settings;
     private SecretKeySpec key;
     private javax.crypto.Cipher cipher;
 
-    public DES_PKCS5_CBC(CipherSettings settings) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
+    public DES(CipherSettings settings) throws Exception {
         this.settings = settings;
 
-        byte[] keyBytes = new byte[] {
-                0x01, 0x23, 0x45, 0x67, (byte)0x89, (byte)0xab, (byte)0xcd, (byte)0xef };
+        //set cipher
+        if (settings.getPadding() == CipherSettings.PADDING.PKCS5) {
+            if (settings.getMode() == CipherSettings.MODE.CBC) {
+                this.cipher = javax.crypto.Cipher.getInstance("DES/CBC/PKCS5Padding", "BC");
+            } else if (settings.getMode() == CipherSettings.MODE.ECB) {
+                this.cipher = javax.crypto.Cipher.getInstance("DES/ECB/PKCS5Padding", "BC");
+            }
+        }
+        if (this.cipher == null) throw new Exception("No suitable Settings for DES");
+
+
+        byte[] keyBytes = new byte[]{
+                0x01, 0x23, 0x45, 0x67, (byte) 0x89, (byte) 0xab, (byte) 0xcd, (byte) 0xef};
 
         this.key = new SecretKeySpec(keyBytes, "DES");
-        this.cipher = javax.crypto.Cipher.getInstance("DES/ECB/PKCS7Padding", "BC");
     }
 
     @Override
@@ -54,6 +61,7 @@ public class DES_PKCS5_CBC implements Cipher {
 
         ptLength += cipher.doFinal(plainText, ptLength);
 
+        //padding entfernen (0 bytes)
         return Arrays.copyOf(plainText, ptLength);
     }
 }

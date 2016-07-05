@@ -39,7 +39,6 @@ public class Document {
      * @param payload
      */
     public void setPayload(String payload) {
-        //TODO: richtig machen
         this.payload = payload.getBytes();
     }
 
