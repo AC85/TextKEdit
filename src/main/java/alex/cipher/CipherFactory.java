@@ -11,6 +11,8 @@ public class CipherFactory {
         switch (settings.getCipher()) {
             case DES:
                 return new DES(settings);
+            case ARC4:
+                return new ARC4(settings);
             default:
                 throw new Exception("No suitable Cipher found");
         }
