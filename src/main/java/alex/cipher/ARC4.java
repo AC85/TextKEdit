@@ -8,10 +8,12 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.Arrays;
 
 /**
  * Created by alexanderchristoph on 08/07/16.
+ *
+ * Stream Cipher
+ * Kein Blockmod und kein Padding notwendig
  */
 public class ARC4 implements Cipher {
 
@@ -24,14 +26,17 @@ public class ARC4 implements Cipher {
 
         this.cipher = javax.crypto.Cipher.getInstance("ARC4", settings.getProvider());
 
+        //fester key
         byte[] keyBytes = new byte[]{
                 0x01, 0x23, 0x45, 0x67, (byte) 0x89, (byte) 0xab, (byte) 0xcd, (byte) 0xef};
 
+        //key für ARC4 generieren
         this.key = new SecretKeySpec(keyBytes, "ARC4");
     }
 
     @Override
     public byte[] encrypt(byte[] plaintext) throws InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
+        //länge des ciphertextes ist identisch mit der plaintext länge
         byte[] ciphertext =  new byte[plaintext.length];
         cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, this.key);
         int ctLength = cipher.update(plaintext, 0, plaintext.length, ciphertext, 0);
@@ -47,6 +52,7 @@ public class ARC4 implements Cipher {
         int ptLength = cipher.update(ciphertext, 0, ciphertext.length, plaintext, 0);
         ptLength += cipher.doFinal(plaintext, ptLength);
 
-        return Arrays.copyOf(plaintext, ptLength);
+        //plaintext gleiche länge wie ciphertext
+        return plaintext;
     }
 }

@@ -3,7 +3,9 @@ package alex.cipher;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.ShortBufferException;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.util.Arrays;
 
@@ -19,9 +21,10 @@ public class DES implements Cipher {
     public DES(CipherSettings settings) throws Exception {
         this.settings = settings;
 
-        //set cipher
+        //cipher anhand der gewählten Parameter setzen
         if (settings.getPadding() == CipherSettings.PADDING.PKCS5) {
             if (settings.getMode() == CipherSettings.MODE.CBC) {
+                //zufälliger Initialisierungs Vektor wird generiert, sofern man keinen angibt
                 this.cipher = javax.crypto.Cipher.getInstance("DES/CBC/PKCS5Padding", "BC");
             } else if (settings.getMode() == CipherSettings.MODE.ECB) {
                 this.cipher = javax.crypto.Cipher.getInstance("DES/ECB/PKCS5Padding", "BC");
@@ -30,6 +33,7 @@ public class DES implements Cipher {
         if (this.cipher == null) throw new Exception("No suitable Settings for DES");
 
 
+        //fester schlüssel
         byte[] keyBytes = new byte[]{
                 0x01, 0x23, 0x45, 0x67, (byte) 0x89, (byte) 0xab, (byte) 0xcd, (byte) 0xef};
 
@@ -38,6 +42,9 @@ public class DES implements Cipher {
 
     @Override
     public byte[] encrypt(byte[] plaintext) throws InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
+
+        //pseudo zufälligen IV auslesen und in settings abspeichern
+        this.settings.setIv(cipher.getIV());
 
         cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, key);
 
@@ -51,9 +58,13 @@ public class DES implements Cipher {
     }
 
     @Override
-    public byte[] decrypt(byte[] ciphertext) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public byte[] decrypt(byte[] ciphertext) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
 
-        cipher.init(javax.crypto.Cipher.DECRYPT_MODE, key);
+        //initialisierungsvektor auslesen
+        byte[] iv = this.settings.getIv();
+
+        //iv für decryption setzen
+        cipher.init(javax.crypto.Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 
         byte[] plainText = new byte[cipher.getOutputSize(ciphertext.length)];
 
@@ -61,7 +72,7 @@ public class DES implements Cipher {
 
         ptLength += cipher.doFinal(plainText, ptLength);
 
-        //padding entfernen (0 bytes)
+        //padding entfernen
         return Arrays.copyOf(plainText, ptLength);
     }
 }

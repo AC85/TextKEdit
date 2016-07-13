@@ -3,6 +3,7 @@ package alex.cipher;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.ShortBufferException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 
 /**
@@ -10,5 +11,5 @@ import java.security.InvalidKeyException;
  */
 public interface Cipher {
     public byte[] encrypt(byte[] plaintext) throws InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException;
-    public byte[] decrypt(byte[] ciphertext) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException;
+    public byte[] decrypt(byte[] ciphertext) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException;
 }
