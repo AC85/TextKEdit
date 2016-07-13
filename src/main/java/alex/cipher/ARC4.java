@@ -24,6 +24,7 @@ public class ARC4 implements Cipher {
     public ARC4(CipherSettings settings) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException {
         this.settings = settings;
 
+        // cipher mit ARC4 initalisieren
         this.cipher = javax.crypto.Cipher.getInstance("ARC4", settings.getProvider());
 
         //fester key
@@ -38,8 +39,14 @@ public class ARC4 implements Cipher {
     public byte[] encrypt(byte[] plaintext) throws InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
         //länge des ciphertextes ist identisch mit der plaintext länge
         byte[] ciphertext =  new byte[plaintext.length];
+
+        // Cipher für die Verschlüsselung vorbereiten
         cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, this.key);
+
+        // Verschlüsselung durch Cipher update
         int ctLength = cipher.update(plaintext, 0, plaintext.length, ciphertext, 0);
+
+        // Verschlüsselung des letzten Blocks
         ctLength += cipher.doFinal(ciphertext, ctLength);
 
         return ciphertext;
@@ -47,9 +54,16 @@ public class ARC4 implements Cipher {
 
     @Override
     public byte[] decrypt(byte[] ciphertext) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        // festlegung der Größe des Buffers
         byte[] plaintext = new byte[ciphertext.length];
+
+        // Cipher für die Entschlüsselung vorbereiten
         cipher.init(javax.crypto.Cipher.DECRYPT_MODE, this.key);
+
+        // Entschlüsselung durch cipher.update
         int ptLength = cipher.update(ciphertext, 0, ciphertext.length, plaintext, 0);
+
+        // Verschlüsselung des letzten Blocks
         ptLength += cipher.doFinal(plaintext, ptLength);
 
         //plaintext gleiche länge wie ciphertext

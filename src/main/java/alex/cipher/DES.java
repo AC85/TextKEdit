@@ -18,6 +18,7 @@ public class DES implements Cipher {
     private SecretKeySpec key;
     private javax.crypto.Cipher cipher;
 
+
     public DES(CipherSettings settings) throws Exception {
         this.settings = settings;
 
@@ -33,7 +34,7 @@ public class DES implements Cipher {
         if (this.cipher == null) throw new Exception("No suitable Settings for DES");
 
 
-        //fester schlüssel
+        //fester schlüssel zum Speichern
         byte[] keyBytes = new byte[]{
                 0x01, 0x23, 0x45, 0x67, (byte) 0x89, (byte) 0xab, (byte) 0xcd, (byte) 0xef};
 
@@ -48,10 +49,13 @@ public class DES implements Cipher {
 
         cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, key);
 
+        // größe des Outputs Buffers festlegen
         byte[] cipherText = new byte[cipher.getOutputSize(plaintext.length)];
 
+        // Verschlüsselung durch cipher.update
         int ctLength = cipher.update(plaintext, 0, plaintext.length, cipherText, 0);
 
+        // Verschlüsselung des letzten Blocks
         ctLength += cipher.doFinal(cipherText, ctLength);
 
         return cipherText;
@@ -66,10 +70,13 @@ public class DES implements Cipher {
         //iv für decryption setzen
         cipher.init(javax.crypto.Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 
+        // größe des Output Buffers festlegen
         byte[] plainText = new byte[cipher.getOutputSize(ciphertext.length)];
 
+        // Verschlüsselung durch cipher.update
         int ptLength = cipher.update(ciphertext, 0, ciphertext.length, plainText, 0);
 
+        // Verschlüssung des letzten Blocks
         ptLength += cipher.doFinal(plainText, ptLength);
 
         //padding entfernen
